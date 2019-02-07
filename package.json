@@ -1,0 +1,34 @@
+{
+  "name": "wellington_health_tech_network",
+  "version": "0.0.1",
+  "description": "a custom wordpress theme for the wellington health tech network",
+  "main": "index.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RichardHpa/Wellington-Health-Tech-Network.git"
+  },
+  "keywords": [
+    "wellington",
+    "health",
+    "tech",
+    "network"
+  ],
+  "author": "Richard Hpa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RichardHpa/Wellington-Health-Tech-Network/issues"
+  },
+  "homepage": "https://github.com/RichardHpa/Wellington-Health-Tech-Network#readme",
+  "devDependencies": {
+    "grunt": "^1.0.3",
+    "grunt-contrib-csslint": "^2.0.0",
+    "grunt-contrib-cssmin": "^3.0.0",
+    "grunt-contrib-jshint": "^2.0.0",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-uglify": "^4.0.0",
+    "grunt-contrib-watch": "^1.1.0"
+  }
+}
