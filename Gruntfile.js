@@ -7,13 +7,13 @@ module.exports = function(grunt){
                     noCache: true
                 },
                 files:{
-                    "assets/css/sass.css":"assets/sass/style.scss"
+                    "assets/css/style.css":"assets/scss/master.scss"
                 }
             }
         },
         watch: {
             sass:{
-                files:["assets/sass/*.scss", "assets/sass/partials/*.scss", "!assets/sass/mediaQueries.scss"],
+                files:["assets/scss/*.scss", "assets/scss/partials/*.scss", "!assets/scss/mediaQueries.scss"],
                 tasks:["sass"]
             }
         }
