@@ -1,22 +1,69 @@
 module.exports = function(grunt){
     grunt.initConfig({
-        sass:{
-            dist:{
+        sass: {
+            admin: {
+                src: ['assets/scss/admin/admin.scss'],
+                dest: 'assets/css/admin/admin.css',
                 options: {
                     sourcemap: 'none',
                     noCache: true
-                },
-                files:{
-                    "assets/css/style.css":"assets/scss/master.scss"
+                }
+            },
+            front: {
+                src: ['assets/scss/front/master.scss'],
+                dest: 'assets/css/front/style.css',
+                options: {
+                    sourcemap: 'none',
+                    noCache: true
                 }
             }
         },
         watch: {
-            sass:{
-                files:["assets/scss/*.scss", "assets/scss/partials/*.scss", "!assets/scss/mediaQueries.scss"],
-                tasks:["sass"]
+            admin_scss: {
+                files: [
+                    'assets/scss/admin/*.scss'
+                ],
+                tasks: [
+                    'sass:admin',
+                ]
+            },
+            front_scss: {
+                files: [
+                    'assets/scss/front/**/*.scss',
+                    'assets/scss/front/*.scss'
+                ],
+                tasks: [
+                    'sass:front'
+                ]
+            },
+        },
+        csslint: {
+            strict: {
+              options: {
+                import: 2
+              },
+              src: ["assets/css/front/style.css"]
             }
-        }
+        },
+        jshint: {
+            files: ["*.js", "assets/js/script.js"],
+            options: {
+                globals:{
+                    jQuery: true
+                }
+            }
+        },
+        cssmin: {
+          target: {
+            files: [{
+              expand: true,
+              cwd: 'assets/css/*/',
+              src: ['*.css', '!*.min.css'],
+              dest: 'css/',
+              ext: '.min.css'
+            }]
+          }
+        },
     });
 
     // grunt.loadNpmTasks();
@@ -28,7 +75,9 @@ module.exports = function(grunt){
     grunt.loadNpmTasks('grunt-contrib-sass');
 
     // grunt.registerTask();
+    grunt.registerTask('complie', ['sass:front', 'sass:admin']);
     grunt.registerTask('default', ['watch']);
     grunt.registerTask('compile', ['sass']);
+    // grunt.registerTask('validate', ['csslint', 'jshint']);
 
 };

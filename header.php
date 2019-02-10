@@ -6,3 +6,4 @@
         <?php wp_head(); ?>
     </head>
     <body>
+        <main role="main" class="container">
