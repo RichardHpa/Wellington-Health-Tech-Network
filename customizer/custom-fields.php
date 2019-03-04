@@ -96,6 +96,21 @@ $metaboxes = array(
                 'size' => 100
             )
         )
+    ),
+    'external_link' => array(
+        'title' => __('External Link', 'whtn'),
+        'applicableto' => 'post',
+        'location' => 'normal',
+        'display_condition' => 'post-format-link',
+        'priority' => 'low',
+        'fields' => array(
+            'ex_link' => array(
+                'title' => __('Link to external Post', 'whtn'),
+                'type' => 'external_link',
+                'description' => 'Insert a external link to a web page',
+                'size' => 100
+            )
+        )
     )
 );
 
@@ -230,6 +245,29 @@ function show_metaboxes($post, $args){
                         $output .= '<button data-type="video" class="removeButton button customButton">Remove Video</button>';
                     $output .= '</div>';
                 break;
+                case 'external_link':
+                    $valid = $customValues[$id][0];
+                    if($valid){
+                        $html = file_get_contents($valid);
+                        preg_match_all( '|<img.*?src=[\'"](.*?)[\'"].*?>|i',$html, $matches );
+                        $imgURL = json_encode($matches[1][0]);
+                        preg_match_all('/<title.*?>(.*)<\/title>/msi',$html, $subresult);
+                        $urlHeading = $subresult[1][0];
+                    }
+                    $output .= '<div class="form-group">';
+                        $output .= '<label for="'.$id.'" class="customLabel">'.$field['title'].'</label>';
+                        $output .= '<p>'.$field['description'].'</p>';
+                        $output .= '<input id="'.$id.'" type="link" name="'.$id.'" class="customInput customLinkInput" value="'.$customValues[$id][0].'">';
+                        $output .= '<input type="hidden" name="externalLinkImageURL" value="'.esc_url($imgURL).'">';
+                        $output .= '<input type="hidden" name="externalLinkHeading" value="'.$urlHeading.'">';
+                        if($valid){
+                            $output .= '<div class="scrapperCard">';
+                                $output .= '<img class="custom_image" src="'.esc_url($imgURL).'">';
+                                $output .= '<h3>'.$urlHeading.'</h3>';
+                            $output .= '</div>';
+                        }
+                    $output .= '</div>';
+                break;
                 default:
                     $output .= '<div class="form-group">';
                         $output .= '<label for="'.$id.'" class="customLabel">'.$field['title'].'</label>';
@@ -279,6 +317,17 @@ function save_metaboxes($postID){
                 }
             }
         }
+    }
+
+    if($_POST['externalLinkImageURL']){
+        update_post_meta( $postID, 'externalLinkImageURL', $_POST['externalLinkImageURL'] );
+    } else {
+        delete_post_meta( $postID, 'externalLinkImageURL');
+    }
+    if($_POST['externalLinkHeading']){
+        update_post_meta( $postID, 'externalLinkHeading', $_POST['externalLinkHeading'] );
+    } else {
+        delete_post_meta( $postID, 'externalLinkHeading');
     }
 }
 add_action('save_post', 'save_metaboxes');

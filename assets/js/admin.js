@@ -41,10 +41,53 @@ $(document).on('click','.removeButton', function(e){
     button.hide();
 })
 
+$(document).on('blur', '.customLinkInput', function(e){
+
+    var formGroup = $(this).parent('.form-group');
+    formGroup.find('.scrapperCard').remove();
+    formGroup.find('.errors').remove();
+    if($(this).val().length > 0){
+        if(isUrl($(this).val())){
+            $.ajax({
+                url: formats.directory + '/assets/apis/imageScrapper.php',
+                type: 'get',
+                dataType: 'json',
+                data: {
+                    url: $(this).val()
+                },
+                success: function(res){
+                    formGroup.append('<div class="scrapperCard">'+
+                    '<img class="custom_image" src="'+res.url+'">'+
+                    '<h3>'+res.heading+'</h3>'+
+                    '</div>'
+                    );
+                    formGroup.find('input[name="externalLinkImageURL"]').val(res.url);
+                    formGroup.find('input[name="externalLinkHeading"]').val(res.heading);
+                },
+                error: function(error){
+                    console.log(error);
+                    alert("error, something went wrong, check the console for more details");
+                }
+            });
+            console.log("valid")
+        } else {
+            formGroup.find('input[name="externalLinkImageURL"]').val('');
+            formGroup.find('input[name="externalLinkHeading"]').val('');
+            formGroup.prepend('<p class="errors">Error: must be a valid url</p>');
+        }
+    }
+})
+
+function isUrl(s) {
+   var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
+   return regexp.test(s);
+}
+
 $(document).on('click', '.customUpload', function(e){
     e.preventDefault();
     var button = $(this);
     var formGroup = $(this).parent('.form-group');
+    formGroup.find('.errors').remove();
     var items_frame;
 
     if ( items_frame ) {

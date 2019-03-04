@@ -132,6 +132,18 @@
             height: auto;
         }
     }
+
+    .scrapperCard{
+        background-color: grey;
+        border: 1px solid black;
+        img{
+            width: 100%;
+        }
+        h3{
+            color: white;
+            padding: 10px;
+        }
+    }
 }
 
 .custom_image{

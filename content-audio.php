@@ -4,6 +4,24 @@
             <h1><?php the_title(); ?></h1>
         </div>
     </div>
+    <?php if(get_post_meta( $post->ID , 'audio_link', true)): ?>
+        <?php
+            $audioID =  get_post_meta( $post->ID, 'audio_link', true );
+            if($audioID){
+                $audioSrc = wp_get_attachment_url( $audioID );
+            }
+        ?>
+        <div class="row mb-3">
+            <div class="col">
+                <div class="audioWrapper">
+                    <audio controls>
+                        <source src="<?= $audioSrc ?>">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
     <div class="row mb-3">
         <div class="col">
             <div class="content">
@@ -24,7 +42,7 @@
                     <h6 class="text-muted"><?= get_the_date('F j, Y'); ?></h6>
                     <h4 class="card-title"><?php the_title(); ?></h4>
                     <?php the_excerpt(); ?>
-                    <a href="<?= get_post_permalink() ?>" class="btn btn-info">View Post</a>
+                    <a href="<?= get_post_permalink() ?>" class="btn btn-info">Listen to the Audio Here</a>
                 </div>
             </div>
         </div>
