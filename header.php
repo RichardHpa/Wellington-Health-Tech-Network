@@ -42,5 +42,14 @@
                     <div class="bar bar-3"></div>
                 </div>
             </nav>
+            <div id="myNav" class="overlay">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                    <?php wp_nav_menu( array(
+                        'theme_location'    => 'header_navigation',
+                        'container'         => 'div',
+                        'container_class'   => 'overlay-content',
+                        'walker' => new nav_has_children_Walker()
+                    )); ?>
+            </div>
         </header>
         <main role="main" class="container">

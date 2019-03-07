@@ -363,10 +363,10 @@ function customizer_style_output(){
                 background-size: cover;
             <?php endif; ?>
         }
-
+/* 
         .home .full{
             background-image: url(<?php if (get_theme_mod( 'home_background_image_setting' )) : echo esc_url( get_background_image_url(home_background_image_setting) ); else: echo get_template_directory_uri().'/assets/images/defaultBanner.jpg'; endif; ?>);
-        }
+        } */
 
         #homeBanner,
         #frontNav li a,
