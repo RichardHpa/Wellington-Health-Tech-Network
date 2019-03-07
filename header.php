@@ -2,12 +2,14 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title></title>
         <?php wp_head(); ?>
+
     </head>
     <body <?php body_class(); ?>>
         <header id="header">
-            <nav class="header-nav navbar navbar-expand-md justify-content-center container">
+            <nav class="header-nav navbar navbar-expand-md justify-content-between container">
                 <?php
                     $url = home_url();
                     $custom_logo_id = get_theme_mod( 'custom_logo' );
@@ -18,22 +20,27 @@
                             echo '<a class="navbar-brand" href="'.esc_url( $url ).'">'. get_bloginfo( 'name' ) .'</a>';
                     }
                  ?>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#header-nav-collapse" aria-controls="bs-example-navbar-collapse-1" aria-expanded="false" aria-label="Toggle navigation">
-                   <span class="navbar-toggler-icon"></span>
-               </button>
-               <?php
+                <?php
+                    // wp_nav_menu( array(
+                    //     'theme_location'    => 'header_navigation',
+                    //     'menu_id'           => 'headerNav',
+                    //     'container'         => 'div',
+                    //     'container_id'      => 'navContainer',
+                    // ));
+
                     wp_nav_menu( array(
-                        'theme_location'    => 'header_navigation',
-                        'depth'             => 2,
-                        'container'         => 'div',
-                        'container_class'   => 'collapse navbar-collapse',
-                        'container_id'      => 'header-nav-collapse',
-                        'menu_class'        => 'nav navbar-nav ml-auto w-100 justify-content-end',
+                        'theme_location' => 'header_navigation',
                         'menu_id'           => 'headerNav',
-                        'fallback_cb'       => 'WP_Bootstrap_Navwalker::fallback',
-                        'walker'            => new WP_Bootstrap_Navwalker(),
-                    ) );
+                        'container'         => 'div',
+                        'container_id'      => 'navContainer',
+                        'walker' => new nav_has_children_Walker()
+                  ) )
                 ?>
+                <div class="menuIcon">
+                    <div class="bar bar-1"></div>
+                    <div class="bar bar-2"></div>
+                    <div class="bar bar-3"></div>
+                </div>
             </nav>
         </header>
         <main role="main" class="container">

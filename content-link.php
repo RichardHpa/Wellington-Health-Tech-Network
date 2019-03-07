@@ -18,7 +18,7 @@
                 <div class="card-block px-2">
                     <h6 class="text-muted"><?= get_the_date('F j, Y'); ?></h6>
                     <h4 class="card-title"><?= $heading ?></h4>
-                    <a href="<?= esc_url($link); ?>" target="blank" class="btn btn-info">View Article</a>
+                    <a href="<?= esc_url($link); ?>" target="blank" class="btn btn-whtn">View Article</a>
                 </div>
             </div>
         </div>

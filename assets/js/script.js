@@ -7,7 +7,24 @@ currentTabs.each(function(){
     }
 });
 
+// console.log($(".menu-item-has-children a:first-child"));
+$(".menu-item-has-children > :first-child").click(function(e){
+    e.preventDefault();
+    console.log("here");
+    var parent = $(this).parent();
+    parent.find('.sub-menu').slideToggle();
+    parent.find('i.fas').toggleClass('fa-caret-down fa-caret-up')
+})
 
+
+$(".menuIcon").click(function(){
+    $(this).toggleClass('change');
+    document.getElementById("myNav").style.width = "100%";
+})
+function closeNav() {
+  document.getElementById("myNav").style.width = "0%";
+  $(".menuIcon").toggleClass('change');
+}
 
 if($('#map').length){
     $("#startDate").text(moment($("#startDate").data('time')).format("MMMM Do YYYY, h:mm a"));

@@ -4,16 +4,17 @@ function customCustomizer($wp_customize){
     require_once( dirname( __FILE__ ) . '/alpha-color-picker/alpha-color-picker.php' );
 
     /*
-    Theme Styles
+        Theme Styles
     */
     $wp_customize->add_section('theme_style_section', array(
         'title' => __('Site Styles', 'whtn'),
         'priority' => 20,
     ));
-
-    //Footer Background Colour
+    /*
+        Primary Colours
+    */
     $wp_customize->add_setting(
-        'footer_color_setting',
+        'primary_color_setting',
         array(
             'default'     => '#228496',
             'type'        => 'theme_mod',
@@ -24,62 +25,19 @@ function customCustomizer($wp_customize){
     $wp_customize->add_control(
         new Customize_Alpha_Color_Control(
             $wp_customize,
-            'footer_colour_control',
+            'primary_color_control',
             array(
-                'label'         => __( 'Footer Background Colour', 'whtn' ),
+                'label'         => __( 'Primary Site Colour', 'whtn' ),
                 'section'       => 'theme_style_section',
-                'settings'      => 'footer_color_setting',
+                'settings'      => 'primary_color_setting',
                 'show_opacity'  => true
             )
         )
     );
 
-    //Footer Text Colour
-    $wp_customize->add_setting(
-        'footer_text_setting',
-        array(
-            'default'     => '#ffffff',
-            'type'        => 'theme_mod',
-            'capability'  => 'edit_theme_options',
-            'transport'   => 'postMessage',
-        )
-    );
-    $wp_customize->add_control(
-        new Customize_Alpha_Color_Control(
-            $wp_customize,
-            'footer_text_control',
-            array(
-                'label'         => __( 'Footer Text Colour', 'whtn' ),
-                'section'       => 'theme_style_section',
-                'settings'      => 'footer_text_setting',
-                'show_opacity'  => true
-            )
-        )
-    );
-
-    //Footer Background Colour
-    $wp_customize->add_setting(
-        'footer_color_setting',
-        array(
-            'default'     => '#228496',
-            'type'        => 'theme_mod',
-            'capability'  => 'edit_theme_options',
-            'transport'   => 'postMessage',
-        )
-    );
-    $wp_customize->add_control(
-        new Customize_Alpha_Color_Control(
-            $wp_customize,
-            'footer_colour_control',
-            array(
-                'label'         => __( 'Footer Background Colour', 'whtn' ),
-                'section'       => 'theme_style_section',
-                'settings'      => 'footer_color_setting',
-                'show_opacity'  => true
-            )
-        )
-    );
-
+    /*
+        Header Sections
+    */
     //Header Text Colour
     $wp_customize->add_setting(
         'header_text_setting',
@@ -102,7 +60,6 @@ function customCustomizer($wp_customize){
             )
         )
     );
-
     //Header Background Colour
     $wp_customize->add_setting(
         'header_color_setting',
@@ -125,7 +82,6 @@ function customCustomizer($wp_customize){
             )
         )
     );
-
     //header background Image
     $wp_customize->add_setting('header_background_image_setting', array(
         'default' => '0',
@@ -142,14 +98,63 @@ function customCustomizer($wp_customize){
         'flex_height' => true,
         'flex_width' => true
 	)));
-
-
+    /*
+        Footer Sections
+    */
+    //Footer Text Colour
+    $wp_customize->add_setting(
+        'footer_text_setting',
+        array(
+            'default'     => '#ffffff',
+            'type'        => 'theme_mod',
+            'capability'  => 'edit_theme_options',
+            'transport'   => 'postMessage',
+        )
+    );
+    $wp_customize->add_control(
+        new Customize_Alpha_Color_Control(
+            $wp_customize,
+            'footer_text_control',
+            array(
+                'label'         => __( 'Footer Text Colour', 'whtn' ),
+                'section'       => 'theme_style_section',
+                'settings'      => 'footer_text_setting',
+                'show_opacity'  => true
+            )
+        )
+    );
+    //Footer Background Colour
+    $wp_customize->add_setting(
+        'footer_color_setting',
+        array(
+            'default'     => '#228496',
+            'type'        => 'theme_mod',
+            'capability'  => 'edit_theme_options',
+            'transport'   => 'postMessage',
+        )
+    );
+    $wp_customize->add_control(
+        new Customize_Alpha_Color_Control(
+            $wp_customize,
+            'footer_colour_control',
+            array(
+                'label'         => __( 'Footer Background Colour', 'whtn' ),
+                'section'       => 'theme_style_section',
+                'settings'      => 'footer_color_setting',
+                'show_opacity'  => true
+            )
+        )
+    );
+    /*
+        Home Sections
+    */
     $wp_customize->add_section('home_style_section', array(
         'title' => __('Home Page Content', 'whtn'),
         'priority' => 20,
     ));
-
-
+    /*
+        Home Image
+    */
     register_default_headers( array(
         'defaultImage' => array(
             'url'           => get_template_directory_uri() . '/assets/images/defaultBanner.jpg',
@@ -181,7 +186,6 @@ function customCustomizer($wp_customize){
         'capability'  => 'edit_theme_options',
         'transport' => 'postMessage'
     ));
-
     $wp_customize->add_control( new WP_Customize_Control($wp_customize,'home_text_control',array(
             'label' => __('Home Page Text', 'whtn'),
             'section' => 'home_style_section',
@@ -189,7 +193,6 @@ function customCustomizer($wp_customize){
             'type' => 'textarea'
         )
     ));
-
     //Front Text  Colour
     $wp_customize->add_setting(
         'front_text_color_setting',
@@ -212,6 +215,104 @@ function customCustomizer($wp_customize){
             )
         )
     );
+    /*
+        Alert
+    */
+    $wp_customize->add_section('alert_section', array(
+        'title' => __('Alert Settings', 'whtn'),
+        'priority' => 20,
+    ));
+
+    $wp_customize->add_setting( 'alert_checkbox_setting', array(
+      'capability' => 'edit_theme_options',
+      'sanitize_callback' => 'themeslug_sanitize_checkbox',
+    ) );
+
+    $wp_customize->add_control( 'alert_checkbox_control', array(
+      'type' => 'checkbox',
+      'section' => 'alert_section', // Add a default or your own section
+      'label' => __( 'View Alert' ),
+      'settings'      => 'alert_checkbox_setting',
+      'description' => __( 'Do you want to see the alert on the front page.' ),
+    ) );
+
+    function themeslug_sanitize_checkbox( $checked ) {
+      // Boolean check.
+      return ( ( isset( $checked ) && true == $checked ) ? true : false );
+    }
+    $wp_customize->add_setting('alert_heading_setting', array(
+        'default' => 'Alert heading',
+        'type'        => 'theme_mod',
+        'capability'  => 'edit_theme_options',
+        'transport' => 'postMessage'
+    ));
+    $wp_customize->add_control( new WP_Customize_Control($wp_customize,'alert_heading_control',array(
+            'label' => __('Alert Heading', 'whtn'),
+            'section' => 'alert_section',
+            'settings' => 'alert_heading_setting',
+            'type' => 'text'
+        )
+    ));
+    $wp_customize->add_setting('alert_text_setting', array(
+        'default' => 'Alert Text',
+        'type'        => 'theme_mod',
+        'capability'  => 'edit_theme_options',
+        'transport' => 'postMessage'
+    ));
+    $wp_customize->add_control( new WP_Customize_Control($wp_customize,'alert_text_control',array(
+            'label' => __('Alert Text', 'whtn'),
+            'section' => 'alert_section',
+            'settings' => 'alert_text_setting',
+            'type' => 'textarea'
+        )
+    ));
+
+    $args = array(
+        'numberposts' => -1,
+        'post_type'   => array('post', 'event')
+    );
+    $allPosts = get_posts($args);
+    $options = array();
+    $options[''] ='';
+    foreach ($allPosts as $singlePost) {
+        $options[$singlePost->ID] = $singlePost->post_title;
+    }
+
+    $wp_customize->add_setting('alert_post_url_setting', array(
+        'default' => '',
+        'transport' => 'refresh'
+    ));
+
+    $wp_customize->add_control(
+        new WP_Customize_Control(
+            $wp_customize,
+            'alert_post_url_control',
+            array(
+                'label' => __('Select Alert Link Post', 'whtn'),
+                'section' => 'alert_section',
+                'settings' => 'alert_post_url_setting',
+                'type' => 'select',
+                'choices' => $options
+            )
+        )
+    );
+
+    $wp_customize->add_setting('alert_url_setting', array(
+        'default' => '',
+        'type'        => 'theme_mod',
+        'transport' => 'refresh'
+    ));
+    $wp_customize->add_control( new WP_Customize_Control($wp_customize,'alert_url_setting',array(
+            'label' => __('Or Alert URL', 'whtn'),
+            'section' => 'alert_section',
+            'settings' => 'alert_url_setting',
+            'type' => 'url'
+        )
+    ));
+
+
+
+
 }
 
 add_action('customize_register', 'customCustomizer');
@@ -244,9 +345,13 @@ function customizer_style_output(){
         }
 
         .navbar-brand,
-        #headerNav li a{
+        .navbar-brand:hover,
+        #headerNav li a,
+        .navbar-light .navbar-brand{
             color: <?php echo get_theme_mod('header_text_setting', '#000000'); ?>;
         }
+
+
 
         header#header{
             background-color: <?php echo get_theme_mod('header_color_setting', '#228496'); ?>;
@@ -269,7 +374,36 @@ function customizer_style_output(){
             color: <?php echo get_theme_mod('front_text_color_setting', '#ffffff'); ?>;
         }
 
+        .menuIcon .bar{
+            color: <?php echo get_theme_mod('front_text_color_setting', '#ffffff'); ?>;
+        }
 
+        .btn-whtn{
+            background-color: <?php echo get_theme_mod('primary_color_setting', '#228496'); ?>;
+            border-color: <?php echo get_theme_mod('primary_color_setting', '#228496'); ?>;
+            color: white;
+        }
+
+        .btn-whtn:hover{
+            color: white;
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+
+        .dateNumber{
+            background-color: <?php echo get_theme_mod('primary_color_setting', '#228496'); ?> ;
+        }
+
+        .eventListItem h5,
+        .eventListItem p,
+        .eventListItem:hover h5,
+        .eventListItem:hover p{
+            color: <?php echo get_theme_mod('primary_color_setting', '#228496'); ?> ;
+        }
+
+        .alert_section{
+            border-left-color: <?php echo get_theme_mod('primary_color_setting', '#228496'); ?> ;
+        }
 
     </style>
 <?php

@@ -1,6 +1,7 @@
 <?php
 flush_rewrite_rules( false );
 add_filter('use_block_editor_for_post', '__return_false');
+
 /*
     Adding Style and Script files into the theme
 */
@@ -148,6 +149,7 @@ require get_parent_theme_file_path('/customizer/customizer.php');
     Adding Bootstrap nav walker
 */
 require get_parent_theme_file_path('/customizer/walkers/class-wp-bootstrap-navwalker.php');
+require get_parent_theme_file_path('/customizer/walkers/class-wp-dropdown-child.php');
 
 
 // Add to existing function.php file

@@ -80,7 +80,7 @@
                     <h6 class="text-muted"><?= get_the_date('F j, Y'); ?></h6>
                     <h4 class="card-title"><?php the_title(); ?></h4>
                     <?php the_excerpt(); ?>
-                    <a href="<?= get_post_permalink() ?>" class="btn btn-info">Watch the Video</a>
+                    <a href="<?= get_post_permalink() ?>" class="btn btn-whtn">Watch the Video</a>
                 </div>
             </div>
         </div>

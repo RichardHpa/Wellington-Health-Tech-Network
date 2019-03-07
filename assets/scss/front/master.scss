@@ -1,4 +1,11 @@
 @import 'bootstrap/bootstrap';
+
+$xs: 576px;
+$sm: 768px;
+$md: 992px;
+$lg: 1200px;
+
+
 @mixin navFont{
     font-family: 'Helvetica Neue';
     font-weight: bold;
@@ -17,11 +24,59 @@ body:not(.home) {
 }
 
 header{
-    @include navFont();
-    .dropdown-menu{
-        border-radius: 0;
-        background-color: rgba(255,255,255,0.5);
+    .header-nav{
+        @media screen and (max-width: $md) {
+            flex-direction: column;
+        }
+        .navbar-brand{
+            &:hover{
+                opacity: 0.5;
+                text-decoration: underline;
+            }
+            @media screen and (max-width: $md) {
+                text-align: center;
+                white-space: normal;
+            }
+        }
+        .menuIcon{
+            display: none;
+            @media screen and (max-width: $md) {
+                display: inline-block;
+            }
+        }
     }
+    @include navFont();
+    #navContainer{
+        display: flex;
+        padding-top: 0.3125rem;
+        padding-bottom: 0.3125rem;
+        @media screen and (max-width: $md) {
+            display: none;
+        }
+        ul{
+            list-style: none;
+            padding: 0;
+            display: flex;
+            margin: 0;
+            flex-direction: row;
+            li{
+                a{
+                    padding: .5rem 1rem;
+                }
+            }
+            .sub-menu{
+                position: absolute;
+                display: none;
+                margin-top: 5px;
+                padding: .5rem 1rem;
+                li{
+                    padding: 5px;
+                    text-align: left;
+                }
+            }
+        }
+    }
+
 }
 
 main{
@@ -40,22 +95,20 @@ main{
     }
 
     #footerMenu{
-        ul{
-            list-style: none;
-            padding: 0;
-            li{
-                float: left;
-                padding-right: 12px;
-                a{
-                    text-transform: uppercase;
-                    color: white;
-                }
+        list-style: none;
+        padding: 0;
+        li{
+            float: left;
+            padding-right: 12px;
+            a{
+                text-transform: uppercase;
+                color: white;
             }
-            &:after {
-                clear: both;
-                content: '';
-                display: block;
-            }
+        }
+        &:after {
+            clear: both;
+            content: '';
+            display: block;
         }
     }
 }
@@ -68,14 +121,23 @@ main{
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
+        .container{
+            position: relative;
+        }
         .content{
             height: 85vh;
             position: relative;
             margin: 0 auto;
+            @media screen and (max-width: $xs) {
+                height: 80vh;
+            }
             .textContent{
                 width: 65%;
                 position: absolute;
                 bottom: 0;
+                @media screen and (max-width: $xs) {
+                    width: 100%;
+                }
                 hr{
                     border-top: 5px solid white;
                 }
@@ -114,6 +176,25 @@ main{
             }
         }
     }
+
+    .alert_section{
+        width: 350px;
+        max-width: 400px;
+        min-height: 50px;
+        position: absolute;
+        top: 50px;
+        right: 0;
+        background-color: white;
+        border-left-width: 5px;
+        border-left-style: solid;
+        padding: 5px;
+        padding-left: 20px;
+        @media screen and (max-width: $xs) {
+            max-width: 100%;
+            top: unset;
+            bottom: 10px;
+        }
+    }
 }
 
 #map{
@@ -147,15 +228,16 @@ main{
         -ms-background-clip: padding-box;
         background-clip: padding-box;
         background-color: #fff;
-        border: 1px solid rgba(0,0,0,.12);
+        // border: 1px solid rgba(0,0,0,.12);
         border-radius: 3px;
         display: block;
         list-style: none;
         margin: 0 0 16px;
         padding: 0;
         .eventListItem{
-
-            border-top: 1px solid rgba(0,0,0,.12);
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+            border-bottom: 1px solid rgba(0,0,0,.12);
             font-size: 16px;
             .row{
                 margin-right: 0;
@@ -165,9 +247,6 @@ main{
                 padding: 16px 16px 0;
             }
             .dateNumber{
-                border-left: 1px solid rgba(0,0,0,.12);
-                border-bottom-color: #95a5a6;
-                background-color: #95a5a6;
                 color: white;
                 text-decoration: underline;
                 padding: 16px 0;
@@ -220,4 +299,101 @@ main{
             background-color: #17a2b8;
         }
     }
+}
+
+.menuIcon{
+    display: inline-block;
+    cursor: pointer;
+    .bar{
+        width: 35px;
+        height: 5px;
+        background-color: white;
+        margin: 6px 0;
+        transition: 0.4s
+    }
+    .bar-3{
+        width: 10px;
+    }
+    &:hover{
+        .bar-3{
+            width: 35px;
+        }
+    }
+}
+
+.change{
+    .bar-1{
+        -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+        transform: rotate(-45deg) translate(-9px, 6px);
+    }
+
+    .bar-2{
+        opacity: 0;
+    }
+
+    .bar-3{
+        -webkit-transform: rotate(45deg) translate(-8px, -8px);
+        transform: rotate(45deg) translate(-8px, -8px);
+        width: 35px;
+    }
+}
+
+
+.overlay {
+    max-height: 100vh;
+    height: 100vh;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0, 0.9);
+    overflow-x: hidden;
+    transition: 0.5s;
+    .overlay-content {
+        position: relative;
+        top: 25%;
+        width: 100%;
+        text-align: center;
+        margin-top: 30px;
+    }
+    a{
+        padding: 8px;
+        text-decoration: none;
+        font-size: 36px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+        &:hover{
+            color: #f1f1f1;
+        }
+        &:focus{
+            color: #f1f1f1;
+        }
+    }
+
+    .closebtn{
+        position: absolute;
+        top: 20px;
+        right: 45px;
+        font-size: 60px;
+    }
+    #menu-main-menu{
+        padding: 0;
+    }
+
+    .sub-menu{
+        padding: 0;
+        display: none;
+    }
+}
+
+@media screen and (max-height: 450px) {
+  .overlay a {font-size: 20px}
+  .overlay .closebtn {
+  font-size: 40px;
+  top: 15px;
+  right: 35px;
+  }
 }

@@ -6,7 +6,7 @@ $(document).ready(function(){
     })
 
 });
-
+$("select").addClass('test');
 function displayMetaBoxes(){
     var selectedFormat = $("input[name='post_format']:checked").attr("id");
     var allFormats = formats.allFormats;

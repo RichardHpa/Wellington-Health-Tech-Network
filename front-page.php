@@ -2,6 +2,7 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title></title>
         <?php wp_head(); ?>
     </head>
@@ -28,7 +29,6 @@
                             <div class="textContent">
                                 <h4 id="homeBanner"><?php echo get_theme_mod('home_text_setting'); ?></h4>
                                 <hr>
-                                <nav class="header-nav navbar navbar-expand-md justify-content-center">
                                     <?php
                                     wp_nav_menu( array(
                                         'theme_location'    => 'header_navigation',
@@ -42,13 +42,44 @@
                                         'walker'            => new WP_Bootstrap_Navwalker(),
                                     ) );
                                      ?>
-                                </nav>
+
+                                <div class="menuIcon">
+                                    <div class="bar bar-1"></div>
+                                    <div class="bar bar-2"></div>
+                                    <div class="bar bar-3"></div>
+                                </div>
 
                             </div>
                         </div>
                     </div>
                 </div>
+                <?php if(get_theme_mod('alert_checkbox_setting')): ?>
+                    <?php if(get_theme_mod('alert_post_url_setting')): ?>
+                        <a href="<?php echo esc_url( get_permalink(get_theme_mod('alert_post_url_setting')) ); ?>">
+                    <?php elseif(get_theme_mod('alert_url_setting')): ?>
+                        <a target="blank" href="<?php echo esc_url( get_theme_mod('alert_url_setting') ); ?>">
+                    <?php endif; ?>
+                    <div class="alert_section">
+                        <h5><?= get_theme_mod('alert_heading_setting'); ?></h5>
+                        <p><?= get_theme_mod('alert_text_setting'); ?></p>
+                    </div>
+                    <?php if( (get_theme_mod('alert_post_url_setting')) ||  (get_theme_mod('alert_url_setting')) ): ?>
+                        </a>
+                    <?php endif; ?>
+                <?php endif; ?>
+
+
             </div>
+        </div>
+
+        <div id="myNav" class="overlay">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <?php wp_nav_menu( array(
+                    'theme_location'    => 'header_navigation',
+                    'container'         => 'div',
+                    'container_class'   => 'overlay-content',
+                    'walker' => new nav_has_children_Walker()
+                )); ?>
         </div>
         <?php wp_footer(); ?>
     </body>
