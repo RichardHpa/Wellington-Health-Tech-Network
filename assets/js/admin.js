@@ -6,7 +6,7 @@ $(document).ready(function(){
     })
 
 });
-$("select").addClass('test');
+// $("select").addClass('test');
 function displayMetaBoxes(){
     var selectedFormat = $("input[name='post_format']:checked").attr("id");
     var allFormats = formats.allFormats;
@@ -18,7 +18,6 @@ function displayMetaBoxes(){
             $("#"+allFormats[format]).hide();
         }
     }
-
 }
 
 $(document).on('click','.removeButton', function(e){
@@ -42,7 +41,6 @@ $(document).on('click','.removeButton', function(e){
 })
 
 $(document).on('blur', '.customLinkInput', function(e){
-
     var formGroup = $(this).parent('.form-group');
     formGroup.find('.scrapperCard').remove();
     formGroup.find('.errors').remove();
@@ -85,11 +83,11 @@ function isUrl(s) {
 
 $(document).on('click', '.customUpload', function(e){
     e.preventDefault();
+    console.log("here");
     var button = $(this);
     var formGroup = $(this).parent('.form-group');
     formGroup.find('.errors').remove();
     var items_frame;
-
     if ( items_frame ) {
         items_frame.open();
         return;
@@ -123,6 +121,7 @@ $(document).on('click', '.customUpload', function(e){
             });
         break;
         case 'image':
+        console.log(wp.media);
             items_frame = wp.media.frames.items = wp.media({
                 title: 'Add to Gallery',
                 button: {

@@ -111,6 +111,20 @@ $metaboxes = array(
                 'size' => 100
             )
         )
+    ),
+    'slide_image' => array(
+        'title' => __('Slide Image', 'whtn'),
+        'applicableto' => 'slide',
+        'location' => 'normal',
+        'priority' => 'low',
+        'fields' => array(
+            'slide_image' => array(
+                'title' => __('Image Slide', 'whtn'),
+                'type' => 'upload_image',
+                'description' => 'Upload an image for the front page Slideshow',
+                'size' => 100
+            )
+        )
     )
 );
 

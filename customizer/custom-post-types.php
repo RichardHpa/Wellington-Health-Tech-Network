@@ -1,6 +1,5 @@
 <?php
 
-
 function events_init() {
     $labels = array(
         'name'               => _x( 'Events', 'whtn' ),
@@ -38,3 +37,43 @@ function my_admin_enqueue_scripts() {
         wp_dequeue_script( 'autosave' );
 }
 add_action( 'admin_enqueue_scripts', 'my_admin_enqueue_scripts' );
+
+function slider_init(){
+    $labels = array(
+        'name'               => _x( 'Slides', 'whtn' ),
+        'singular_name'      => _x( 'Slide', 'whtn' ),
+        'menu_name'          => _x( 'Slides', 'whtn' ),
+        'name_admin_bar'     => _x( 'Slide', 'whtn' ),
+        'add_new'            => _x( 'Add a new Slide', 'whtn' ),
+        'add_new_item'       => __( 'Add a new Slide', 'whtn' ),
+        'new_item'           => __( 'New Slide', 'whtn' ),
+        'edit_item'          => __( 'Edit Slide', 'whtn' ),
+        'view_item'          => __( 'View Slide', 'whtn' ),
+        'all_items'          => __( 'All Slides', 'whtn' ),
+        'search_items'       => __( 'Search Slides', 'whtn' ),
+        'parent_item_colon'  => __( 'Parent Slide:', 'whtn' ),
+        'not_found'          => __( 'No Slides found.', 'whtn' ),
+        'not_found_in_trash' => __( 'No Slides found in Trash.', 'whtn' )
+    );
+    $args = array(
+      'labels' => $labels,
+        'public' => false,
+        'show_ui' => true,
+        'capability_type' => 'post',
+        'hierarchical' => false,
+        'query_var' => false,
+        'menu_icon' => 'dashicons-slides',
+        'supports' => array(
+            'title')
+        );
+    register_post_type( 'slide', $args );
+}
+add_action( 'init', 'slider_init' );
+
+function meta_box_scripts() {
+    global $post;
+    wp_enqueue_media( array(
+        'post' => $post->ID,
+    ) );
+}
+add_action( 'admin_enqueue_scripts', 'meta_box_scripts' );

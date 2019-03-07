@@ -53,18 +53,54 @@
                     <?php endif; ?>
                 <?php endif; ?>
             </div>
+            <?php
+                $args = array(
+                    'post_type' => 'slide',
+                    'posts_per_page' => -1
+                );
+                $allSlides = new WP_Query($args);
+             ?>
+             <?php $total = $allSlides->found_posts; ?>
+
+             <?php if($total == 0): ?>
+                 <?php if (get_theme_mod( 'home_background_image_setting' )) : ?>
+                     <?php $imageURL = esc_url( get_background_image_url(home_background_image_setting) ); ?>
+                 <?php else: ?>
+                     <?php $imageURL = get_template_directory_uri().'/assets/images/defaultBanner.jpg'; ?>
+                 <?php endif; ?>
+                 <div class="singleSlide" style="background-image: url(<?= $imageURL ?>);"></div>
+             <?php elseif($total == 1): ?>
+                 <?php while($allSlides->have_posts()): $allSlides->the_post();?>
+                     <?php
+                         $postID = get_the_ID();
+                         $imageID =  get_post_meta( $postID, 'slide_image', true );
+                     ?>
+                     <div class="singleSlide" style="background-image: url(<?= wp_get_attachment_image_src( $imageID, 'full')[0]  ?>);"></div>
+                 <?php endwhile; ?>
+             <?php else: ?>
+                 <?php $i = 1; ?>
+                 <div id="cycler">
+                    <?php while($allSlides->have_posts()): $allSlides->the_post();?>
+                        <?php
+                            $postID = get_the_ID();
+                            $imageID =  get_post_meta( $postID, 'slide_image', true );
+                            $classes = 'slide';
+                            if($i == 1){
+                                $classes .= ' active';
+                            }
+                        ?>
+                        <div class="<?= $classes; ?>" style="background-image: url(<?= wp_get_attachment_image_src( $imageID, 'full')[0]  ?>);"></div>
+                        <?php $i++; ?>
+                    <?php endwhile; ?>
+                 </div>
+             <?php endif; ?>
 
 
 
 
 
 
-            <div id="cycler">
-                <div class="slide red active" style="background-image: url(https://picsum.photos/500/?random);"></div>
-                <div class="slide blue" style="background-image: url(https://picsum.photos/g/500/?random);"></div>
-                <div class="slide green" style="background-image: url(https://picsum.photos/500/?random);"></div>
-                <div class="slide yellow" style="background-image: url(https://picsum.photos/g/500/?random);"></div>
-            </div>
+
         </div>
         <div id="myNav" class="overlay">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
