@@ -417,16 +417,44 @@ main{
     }
 }
 
-@media screen and (max-height: 450px) {
+.navOpen{
+    width: 40%;
+}
+
+@media screen and (max-width: 450px) {
   .overlay a {font-size: 20px}
   .overlay .closebtn {
   font-size: 40px;
   top: 15px;
   right: 35px;
   }
+
+  .navOpen{
+      width: 100%;
+  }
 }
 
 .cal-dropdown{
     float: right;
     padding-left: 10px;
+}
+
+html.adminLoggedIn{
+    margin-top: 0 !important;
+    // position: relative;
+    // body{
+    //     position: absolute;
+    //     top: 0;
+    //     left: 0;
+    // }
+    .home{
+        .full{
+            .container{
+                padding-top: 50px;
+            }
+        }
+    }
+    body:not(.home){
+        padding-top: 46px;
+    }
 }

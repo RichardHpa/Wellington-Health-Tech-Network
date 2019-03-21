@@ -2,6 +2,12 @@
 flush_rewrite_rules( false );
 add_filter('use_block_editor_for_post', '__return_false');
 
+add_action('get_header', 'my_filter_head');
+
+function my_filter_head() {
+  remove_action('wp_head', '_admin_bar_bump_cb');
+}
+
 /*
     Adding Style and Script files into the theme
 */
