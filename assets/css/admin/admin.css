@@ -1,0 +1,114 @@
+* {
+  box-sizing: border-box; }
+
+.customField {
+  padding: 3px 8px;
+  height: 1.7em;
+  width: 100%;
+  outline: 0;
+  margin: 0 0 3px;
+  background-color: #fff;
+  margin: 10px 0; }
+
+.customInput {
+  padding: 3px 8px;
+  font-size: 1.7em;
+  line-height: 100%;
+  height: 1.7em;
+  width: 100%;
+  outline: 0;
+  margin: 0 0 3px;
+  background-color: #fff;
+  margin-bottom: 1em;
+  margin-top: 0.4em; }
+
+.customLabel {
+  font-weight: bold; }
+
+.alwaysHidden {
+  display: none !important; }
+
+#map {
+  width: 100%;
+  height: 300px;
+  border: 1px solid #ddd;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.07); }
+
+#eventSelect {
+  display: none; }
+
+#eventDescription {
+  display: none; }
+  #eventDescription .EventDecs {
+    padding: 3px 8px;
+    width: 100%;
+    outline: 0;
+    margin: 0 0 3px;
+    background-color: #fff;
+    margin: 10px 0; }
+
+.show {
+  display: block; }
+
+.hide {
+  display: none; }
+
+.loader {
+  margin: 0 auto;
+  border: 8px solid #f3f3f3;
+  /* Light grey */
+  border-top: 8px solid #555;
+  /* Blue */
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 2s linear infinite; }
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+.customButton {
+  margin-top: 15px !important;
+  margin-right: 10px !important; }
+
+.form-group {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 10px; }
+  .form-group p {
+    margin-bottom: 0;
+    margin-top: 0; }
+  .form-group.noImage .removeButton, .form-group.noAudio .removeButton, .form-group.noVideo .removeButton {
+    display: none; }
+  .form-group.noAudio audio {
+    display: none; }
+  .form-group.noVideo video {
+    display: none; }
+  .form-group.validImage .removeButton, .form-group.validAudio .removeButton, .form-group.validVideo .removeButton {
+    display: inline; }
+  .form-group.validAudio audio {
+    display: block;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 0; }
+  .form-group.validVideo video {
+    border: 1px solid #95a5a6;
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: auto; }
+  .form-group .scrapperCard {
+    background-color: grey;
+    border: 1px solid black; }
+    .form-group .scrapperCard img {
+      width: 100%; }
+    .form-group .scrapperCard h3 {
+      color: white;
+      padding: 10px; }
+
+.custom_image {
+  width: 100%; }
