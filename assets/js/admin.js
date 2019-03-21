@@ -1,10 +1,11 @@
 $ = jQuery;
 $(document).ready(function(){
-    displayMetaBoxes();
-    $("input[name='post_format']").change(function(){
+    if($("input[name='post_format']").length){
         displayMetaBoxes();
-    })
-
+        $("input[name='post_format']").change(function(){
+            displayMetaBoxes();
+        })
+    }
 });
 // $("select").addClass('test');
 function displayMetaBoxes(){

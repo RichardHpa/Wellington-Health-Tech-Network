@@ -11,6 +11,13 @@ get_header();
                      <h1><?php the_title(); ?></h1>
                  </div>
              </div>
+             <div class="row">
+                 <div class="col">
+                     <div class="">
+                        <?php the_content(); ?>
+                     </div>
+                 </div>
+             </div>
          </div>
      <?php endwhile; ?>
  <?php endif; ?>

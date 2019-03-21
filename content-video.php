@@ -34,7 +34,6 @@
             </div>
         </div>
     <?php endif; ?>
-
     <div class="row mb-3">
         <div class="col">
             <div class="content">
@@ -64,7 +63,7 @@
                         </video>
                     </div>
                 </div>
-            <?php elseif(get_post_meta( $id , 'video_link', true)): ?>
+            <?php elseif(get_post_meta( $post->ID , 'video_link', true)): ?>
                 <?php
                     $videoURL=  get_post_meta( $post->ID, 'video_link', true );
                     $embed_code = wp_oembed_get($videoURL);

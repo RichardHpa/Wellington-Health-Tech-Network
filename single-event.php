@@ -5,13 +5,24 @@
         <div class="container">
             <div class="row pb-4">
                 <div class="col-12 col-md-8">
-                    <h1><?php the_title(); ?></h1>
+                    <h1 id="eventTitle"><?php the_title(); ?></h1>
                     <h5><span id="startDate" data-time="<?= get_post_meta($id, 'eventStartTime', true)  ?>"></span> until <span id="endDate" data-time="<?= get_post_meta($id, 'eventEndTime', true)  ?>"></span></h5>
 
-                    <h5><?= get_post_meta($id, 'eventLocation', true)  ?></h5>
+                    <h5 id="eventLocation"><?= get_post_meta($id, 'eventLocation', true)  ?></h5>
                 </div>
                 <div class="col-12 col-md-4 text-left text-md-right">
                     <a class="btn btn-whtn" href="<?= get_post_meta($id, 'eventLink', true)  ?>" target="blank">Register Here</a>
+                    <div class="dropdown cal-dropdown">
+                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-calendar-alt"></i> Add to Calendar
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a data-type="apple" class="dropdown-item" href="#"><i class="fab fa-apple"></i> Apple Calendar</a>
+
+                        <a data-type="google" class="dropdown-item" target="_blank" href=""><i class="fab fa-google"></i> Google Calendar</a>
+                      </div>
+                    </div>
+
                     <!-- <div title="Add to Calendar" class="addeventatc">
                         Add to Calendar
                         <span class="start">03/05/2019 08:00 AM</span>
@@ -25,7 +36,7 @@
             </div>
             <div class="row pb-4">
                 <div class="col">
-                    <div class="content">
+                    <div id="eventDesc" class="content">
                         <?= get_post_meta($id, 'eventDescription', true)  ?>
                     </div>
                 </div>

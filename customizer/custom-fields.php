@@ -17,11 +17,11 @@ $metaboxes = array(
                 'type' => 'eventTextarea'
             ),
             'eventStartTime' => array(
-                'title' => 'Event Start Time',
+                'title' => 'Event Start Time (NZST)',
                 'type' => 'eventTime'
             ),
             'eventEndTime' => array(
-                'title' => 'Event End Time',
+                'title' => 'Event End Time (NZST)',
                 'type' => 'eventTime'
             ),
             'eventLocation' => array(
@@ -124,6 +124,38 @@ $metaboxes = array(
                 'description' => 'Upload an image for the front page Slideshow',
                 'size' => 100
             )
+        )
+    ),
+    'podcast_info' => array(
+        'title' => __('Podcast Media', 'whtn'),
+        'applicableto' => 'podcast',
+        'location' => 'normal',
+        'priority' => 'low',
+        'fields' => array(
+            'video_upload' => array(
+                'title' => __('Upload Video Podcast: ', 'whtn'),
+                'type' => 'upload_video',
+                'description' => 'Upload your own video',
+                'size' => 100
+            ),
+            'video_link' => array(
+                'title' => __('Link to Video Podcast: ', 'whtn'),
+                'type' => 'link',
+                'description' => 'Or Insert the embed src url for the video, will be found in the embed section',
+                'size' => 100
+            ),
+            'audio_upload' => array(
+                'title' => __('Upload Audio Podcast: ', 'whtn'),
+                'type' => 'upload_audio',
+                'description' => 'Upload your own audio podcast',
+                'size' => 100
+            ),
+            // 'audio_link' => array(
+            //     'title' => __('Link to Audio Podcast: ', 'whtn'),
+            //     'type' => 'upload_audio',
+            //     'description' => 'Insert the src url for the audio, will be found in the embed section',
+            //     'size' => 100
+            // )
         )
     )
 );
@@ -230,7 +262,7 @@ function show_metaboxes($post, $args){
                         $output .= '<label for="'.$id.'" class="customLabel">'.$field['title'].'</label>';
                         $output .= '<p>'.$field['description'].'</p>';
                         $output .= '<img class="custom_image" src="'.$imagesrc.'">';
-                        $output .= '<input type="hidden" value="' . $custom[$id][0] . '" class="customInput regular-text hiddenCustomInput" name="'.$id.'" readonly>';
+                        $output .= '<input type="hidden" value="' . $imageID . '" class="customInput regular-text hiddenCustomInput" name="'.$id.'" readonly>';
                         $output .= '<button data-type="image" class="customUpload button customButton">Add new Image</button>';
                         $output .= '<button data-type="image" class="removeButton button customButton">Remove Image</button>';
                     $output .= '</div>';
@@ -254,7 +286,7 @@ function show_metaboxes($post, $args){
                             }
                             $output .= 'Your browser does not support HTML5 video.';
                         $output .= '</video>';
-                        $output .= '<input type="hidden" value="' . $custom[$id][0] . '" class="customInput regular-text hiddenCustomInput" name="'.$id.'" readonly>';
+                        $output .= '<input type="hidden" value="' . $videoID . '" class="customInput regular-text hiddenCustomInput" name="'.$id.'" readonly>';
                         $output .= '<button data-type="video" class="customUpload button customButton">Add new Video</button>';
                         $output .= '<button data-type="video" class="removeButton button customButton">Remove Video</button>';
                     $output .= '</div>';

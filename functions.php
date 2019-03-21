@@ -7,19 +7,18 @@ add_filter('use_block_editor_for_post', '__return_false');
 */
 function customThemeEnqueues(){
     wp_enqueue_script('jquery');
-    
+    $options = get_option( 'apikey_options' );
     wp_enqueue_style('fontAwesome5', 'https://use.fontawesome.com/releases/v5.7.2/css/all.css', array(), '1.0.0', 'all');
     wp_enqueue_script('google_jsFront', 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key='.$options['apikey_field_google'].'&libraries=places', array(), '', true );
     wp_enqueue_script('momentScript', get_template_directory_uri() . '/assets/js/moment.js', array(), '1.0.0', true);
-    wp_enqueue_script('addCalScript', 'https://addevent.com/libs/atc/1.6.1/atc.min.js', array(), '1.0.0', true);
 
+    wp_enqueue_script('popperjs', get_template_directory_uri() . '/assets/js/popper.min.js', array(), '1.0.0', true);
     wp_enqueue_script('bootstrapjs', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array(), '4.1.3', true);
 
-    wp_enqueue_style('masterStyle', get_template_directory_uri() . '/assets/css/front/style.css', array(), '0.0.1', 'all');
+    wp_enqueue_style('masterStyle', get_template_directory_uri() . '/assets/css/front/style.css', array(), '1.0.0', 'all');
 
-
+    wp_enqueue_script('icalScript', get_template_directory_uri() . '/assets/js/ics.min.js', array(), '1.0.0', true);
     wp_enqueue_script('customScript', get_template_directory_uri() . '/assets/js/script.js', array(), '1.0.0', true);
-
 }
 add_action('wp_enqueue_scripts', 'customThemeEnqueues', 11);
 

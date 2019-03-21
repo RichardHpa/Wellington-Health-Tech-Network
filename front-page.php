@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title></title>
+        <title><?= get_bloginfo('name'); ?></title>
         <?php wp_head(); ?>
     </head>
     <body <?php body_class(); ?>>
@@ -94,13 +94,6 @@
                     <?php endwhile; ?>
                  </div>
              <?php endif; ?>
-
-
-
-
-
-
-
         </div>
         <div id="myNav" class="overlay">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -114,9 +107,3 @@
         <?php wp_footer(); ?>
     </body>
 </html>
-
-
-<!-- <div class="red active"><img src="https://picsum.photos/500/?random" alt="My image" /></div>
-<div class="blue"><img src="https://picsum.photos/g/500/?random" alt="My image" /></div>
-<div class="green"><img src="https://picsum.photos/500/?random" alt="My image" /></div>
-<div class="yello"><img src="https://picsum.photos/g/500/?random" alt="My image" /></div> -->
