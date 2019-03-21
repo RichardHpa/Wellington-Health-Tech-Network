@@ -7121,4 +7121,7 @@ html.adminLoggedIn {
   html.adminLoggedIn .home .full .container {
     padding-top: 50px; }
   html.adminLoggedIn body:not(.home) {
-    padding-top: 46px; }
+    padding-top: 32px; }
+    @media screen and (max-width: 782px) {
+      html.adminLoggedIn body:not(.home) {
+        padding-top: 46px; } }

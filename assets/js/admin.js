@@ -7,7 +7,6 @@ $(document).ready(function(){
         })
     }
 });
-// $("select").addClass('test');
 function displayMetaBoxes(){
     var selectedFormat = $("input[name='post_format']:checked").attr("id");
     var allFormats = formats.allFormats;
@@ -15,7 +14,6 @@ function displayMetaBoxes(){
         if(format === selectedFormat){
             $("#"+allFormats[format]).fadeIn();
         } else {
-            // $("#"+allFormats[format]).find(".customInput").val("");
             $("#"+allFormats[format]).hide();
         }
     }

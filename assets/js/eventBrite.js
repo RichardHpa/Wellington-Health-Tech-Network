@@ -2,15 +2,15 @@ $ = jQuery;
 
 if($('#eventSelect').length){
 
-    var input = document.getElementById('eventLocation');
-    var autocomplete = new google.maps.places.Autocomplete(input);
+    // var input = document.getElementById('eventLocation');
+    // var autocomplete = new google.maps.places.Autocomplete(input);
 
-    autocomplete.addListener('place_changed', function() {
-        var place = autocomplete.getPlace();
-        $("#eventLat").val(place.geometry['location'].lat());
-        $("#eventLng").val(place.geometry['location'].lng());
-        createMap(place.geometry['location'].lat(), place.geometry['location'].lng())
-    });
+    // autocomplete.addListener('place_changed', function() {
+    //     var place = autocomplete.getPlace();
+    //     $("#eventLat").val(place.geometry['location'].lat());
+    //     $("#eventLng").val(place.geometry['location'].lng());
+    //     createMap(place.geometry['location'].lat(), place.geometry['location'].lng())
+    // });
 
     $.ajax({
         url: 'https://www.eventbriteapi.com/v3/users/me/events/?token='+variables['eventBriteKey'],
@@ -57,8 +57,6 @@ if($('#eventSelect').length){
                 url: 'https://www.eventbriteapi.com/v3/events/'+value+'/?token='+variables['eventBriteKey']+'&expand=venue',
                 dataType: 'json',
                 success:function(event){
-                    console.log(event);
-
                     $("#title").focus().val(event.name['text']).blur();
                     $("#eventDescription").find('textarea').val(event.description['text']);
                     $("#eventStartTime").val(event.start['local']);
