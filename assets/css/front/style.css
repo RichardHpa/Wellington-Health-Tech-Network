@@ -6898,7 +6898,7 @@ main {
         margin: 0 auto; }
         @media screen and (max-width: 576px) {
           .home .full .container .content {
-            height: 80vh; } }
+            height: 90vh; } }
         .home .full .container .content header nav {
           z-index: 100;
           padding: 0; }
@@ -6942,18 +6942,20 @@ main {
     max-width: 400px;
     min-height: 50px;
     position: absolute;
-    top: 50px;
+    top: 0;
     right: 0;
     background-color: white;
     border-left-width: 5px;
     border-left-style: solid;
     padding: 5px;
-    padding-left: 20px; }
+    padding-left: 20px;
+    word-wrap: break-word; }
+    @media screen and (max-width: 992px) {
+      .home .alert_section {
+        top: unset; } }
     @media screen and (max-width: 576px) {
       .home .alert_section {
-        max-width: 100%;
-        top: unset;
-        bottom: 10px; } }
+        max-width: 100%; } }
 
 #map {
   min-height: 400px; }
@@ -7071,6 +7073,14 @@ main {
   background-color: rgba(0, 0, 0, 0.9);
   overflow-x: hidden;
   transition: 0.5s; }
+  @media screen and (max-width: 768px) {
+    #myNav {
+      width: 50vw;
+      transform: translateX(-50vw); } }
+  @media screen and (max-width: 576px) {
+    #myNav {
+      width: 100vw;
+      transform: translateX(-100vw); } }
   #myNav .overlay-content {
     position: relative;
     top: 25%;
@@ -7126,3 +7136,17 @@ html.adminLoggedIn {
     @media screen and (max-width: 782px) {
       html.adminLoggedIn body:not(.home) {
         padding-top: 46px; } }
+
+.image-background img {
+  display: none; }
+
+img {
+  max-width: 100%; }
+
+.image-background {
+  background-size: cover;
+  opacity: 0;
+  -moz-transition: opacity 1s;
+  -o-transition: opacity 1s;
+  -webkit-transition: opacity 1s;
+  transition: opacity 1s; }

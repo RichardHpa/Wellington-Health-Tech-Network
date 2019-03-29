@@ -5,10 +5,29 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title><?= get_bloginfo('name'); ?> - <?= $wp_query->post->post_title; ?></title>
         <?php wp_head(); ?>
-
+        <script>
+            function backgroundLoaded(element) {
+                var url = "url('" + element.src + "')";
+                var parent = element.parentNode;
+                var bgPosition = element.dataset.position;
+                if (bgPosition) {
+                    parent.style.backgroundPosition = bgPosition;
+                }
+                parent.style.backgroundImage = url;
+                parent.style.opacity = "1";
+            }
+        </script>
     </head>
     <body <?php body_class(); ?>>
-        <header id="header">
+        <header id="header" class="image-background">
+
+            <?php if(get_theme_mod('header_background_image_setting')): ?>
+                <?php
+                    $imageURL = wp_get_attachment_url(get_theme_mod('header_background_image_setting'));
+                 ?>
+                 <img src="<?= $imageURL; ?>" alt="Wellington Health Tech Network" data-position="50% 50%" onload="backgroundLoaded(this)" />
+            <?php endif; ?>
+
             <nav class="header-nav navbar navbar-expand-md justify-content-between container">
                 <?php
                     $url = home_url();
@@ -21,13 +40,6 @@
                     }
                  ?>
                 <?php
-                    // wp_nav_menu( array(
-                    //     'theme_location'    => 'header_navigation',
-                    //     'menu_id'           => 'headerNav',
-                    //     'container'         => 'div',
-                    //     'container_id'      => 'navContainer',
-                    // ));
-
                     wp_nav_menu( array(
                         'theme_location' => 'header_navigation',
                         'menu_id'           => 'headerNav',

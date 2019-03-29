@@ -356,17 +356,13 @@ function customizer_style_output(){
         header#header{
             background-color: <?php echo get_theme_mod('header_color_setting', '#228496'); ?>;
             <?php if(get_theme_mod('header_background_image_setting')): ?>
-                background-image: url(<?php echo esc_url(get_background_image_url(header_background_image_setting)); ?>);
+                /* background-image: url(<?php echo esc_url(get_background_image_url('header_background_image_setting')); ?>); */
                 height: 300px;
                 background-position: center;
                 background-repeat: no-repeat;
                 background-size: cover;
             <?php endif; ?>
         }
-/* 
-        .home .full{
-            background-image: url(<?php if (get_theme_mod( 'home_background_image_setting' )) : echo esc_url( get_background_image_url(home_background_image_setting) ); else: echo get_template_directory_uri().'/assets/images/defaultBanner.jpg'; endif; ?>);
-        } */
 
         #homeBanner,
         #frontNav li a,

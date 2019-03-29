@@ -152,7 +152,7 @@ main{
                 position: relative;
                 margin: 0 auto;
                 @media screen and (max-width: $xs) {
-                    height: 80vh;
+                    height: 90vh;
                 }
                 header{
                     nav{
@@ -210,17 +210,19 @@ main{
         max-width: 400px;
         min-height: 50px;
         position: absolute;
-        top: 50px;
+        top: 0;
         right: 0;
         background-color: white;
         border-left-width: 5px;
         border-left-style: solid;
         padding: 5px;
         padding-left: 20px;
+        word-wrap: break-word;
+        @media screen and (max-width: $md) {
+            top: unset;
+        }
         @media screen and (max-width: $xs) {
             max-width: 100%;
-            top: unset;
-            bottom: 10px;
         }
     }
 }
@@ -372,6 +374,14 @@ main{
     height: 100vh;
     width: 40vw;
     transform: translateX(-40vw);
+    @media screen and (max-width: $sm) {
+        width: 50vw;
+        transform: translateX(-50vw);
+    }
+    @media screen and (max-width: $xs) {
+        width: 100vw;
+        transform: translateX(-100vw);
+    }
     position: fixed;
     z-index: 1000;
     top: 0;
@@ -456,4 +466,20 @@ html.adminLoggedIn{
             padding-top: 46px;
         }
     }
+}
+
+.image-background img {
+    display: none;
+}
+img {
+    max-width: 100%;
+}
+
+.image-background {
+    background-size: cover;
+    opacity: 0;
+    -moz-transition: opacity 1s;
+    -o-transition: opacity 1s;
+    -webkit-transition: opacity 1s;
+    transition: opacity 1s;
 }

@@ -1,38 +1,5 @@
 <?php
 
-
-// function my_plugin_menu() {
-// 	add_theme_page('My API Keys', 'API Keys', 'edit_theme_options', 'my-api-keys', 'my_api_function');
-//
-//     function my_api_function(){
-//         echo '<h1 class="wp-heading-inline">Site API Information</h1>';
-//     }
-// }
-// add_action('admin_menu', 'my_plugin_menu');
-//
-//
-// function test_custom_settings () {
-//     add_settings_section(
-//     	'eg_setting_sectionq',
-//     	'Example settings section in reading',
-//     	'add_new_setting',
-//     	'my-api-keys'
-//     );
-//
-//     function add_new_setting(){
-//         echo '<p>this is the new section</p>';
-//     }
-// }
-// //admin hook defined in functions.php. This calls the above function at
-// // initialization time.
-// add_action('admin_init', 'test_custom_settings' );
-
-
-
-
-
-
-
 function apikey_settings_init() {
     register_setting( 'apikey', 'apikey_options' );
 
