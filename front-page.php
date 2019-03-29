@@ -75,7 +75,7 @@
                          $postID = get_the_ID();
                          $imageID =  get_post_meta( $postID, 'slide_image', true );
                      ?>
-                     <div class="singleSlide" style="background-image: url(<?= wp_get_attachment_image_src( $imageID, 'full')[0]  ?>);"></div>
+                     <div class="singleSlide" style="background-image: url(<?= wp_get_attachment_image_src( $imageID, 'large')[0]  ?>);"></div>
                  <?php endwhile; ?>
              <?php else: ?>
                  <?php $i = 1; ?>
@@ -89,7 +89,7 @@
                                 $classes .= ' active';
                             }
                         ?>
-                        <div class="<?= $classes; ?>" style="background-image: url(<?= wp_get_attachment_image_src( $imageID, 'full')[0]  ?>);"></div>
+                        <div class="<?= $classes; ?>" style="background-image: url(<?= wp_get_attachment_image_src( $imageID, 'large')[0]  ?>);"></div>
                         <?php $i++; ?>
                     <?php endwhile; ?>
                  </div>

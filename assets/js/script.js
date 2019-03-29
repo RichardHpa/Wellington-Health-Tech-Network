@@ -87,11 +87,9 @@ $(".menu-item-has-children > :first-child").click(function(e){
 
 $(".menuIcon").click(function(){
     $(this).toggleClass('change');
-    // document.getElementById("myNav").style.width = "33%";
     $("#myNav").addClass('navOpen');
 })
 function closeNav() {
-  // document.getElementById("myNav").style.width = "0%";
   $(".menuIcon").toggleClass('change');
   $("#myNav").removeClass('navOpen');
 }

@@ -29,7 +29,6 @@ module.exports = function(grunt){
             },
             front_scss: {
                 files: [
-                    'assets/scss/front/**/*.scss',
                     'assets/scss/front/*.scss'
                 ],
                 tasks: [

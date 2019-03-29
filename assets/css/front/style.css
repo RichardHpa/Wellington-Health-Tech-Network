@@ -7058,10 +7058,11 @@ main {
   transform: rotate(45deg) translate(-8px, -8px);
   width: 35px; }
 
-.overlay {
+#myNav {
   max-height: 100vh;
   height: 100vh;
-  width: 0;
+  width: 40vw;
+  transform: translateX(-40vw);
   position: fixed;
   z-index: 1000;
   top: 0;
@@ -7070,36 +7071,36 @@ main {
   background-color: rgba(0, 0, 0, 0.9);
   overflow-x: hidden;
   transition: 0.5s; }
-  .overlay .overlay-content {
+  #myNav .overlay-content {
     position: relative;
     top: 25%;
     width: 100%;
     text-align: center;
     margin-top: 30px; }
-  .overlay a {
+  #myNav a {
     padding: 8px;
     text-decoration: none;
     font-size: 36px;
     color: #818181;
     display: block;
     transition: 0.3s; }
-    .overlay a:hover {
+    #myNav a:hover {
       color: #f1f1f1; }
-    .overlay a:focus {
+    #myNav a:focus {
       color: #f1f1f1; }
-  .overlay .closebtn {
+  #myNav .closebtn {
     position: absolute;
     top: 20px;
     right: 45px;
     font-size: 60px; }
-  .overlay #menu-main-menu {
+  #myNav #menu-main-menu {
     padding: 0; }
-  .overlay .sub-menu {
+  #myNav .sub-menu {
     padding: 0;
     display: none; }
 
 .navOpen {
-  width: 40%; }
+  transform: translateX(0) !important; }
 
 @media screen and (max-width: 450px) {
   .overlay a {

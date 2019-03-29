@@ -367,10 +367,11 @@ main{
 }
 
 
-.overlay {
+#myNav {
     max-height: 100vh;
     height: 100vh;
-    width: 0;
+    width: 40vw;
+    transform: translateX(-40vw);
     position: fixed;
     z-index: 1000;
     top: 0;
@@ -418,7 +419,8 @@ main{
 }
 
 .navOpen{
-    width: 40%;
+    // width: 40% !important;
+    transform: translateX(0) !important;
 }
 
 @media screen and (max-width: 450px) {
