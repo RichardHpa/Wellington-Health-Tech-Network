@@ -19,7 +19,7 @@
         </script>
     </head>
     <body <?php body_class(); ?>>
-        <header id="header" class="image-background">
+        <header id="header" class="<?php if(get_theme_mod('header_background_image_setting')): ?> image-background <?php endif; ?>">
 
             <?php if(get_theme_mod('header_background_image_setting')): ?>
                 <?php
