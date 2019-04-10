@@ -50,8 +50,6 @@ function apikey_section_developers_cb( $args ) {
 
 function api_field_cb($args){
     $options = get_option( 'apikey_options' );
-    // var_dump( $options );
-    // output the field
     ?>
         <input
             id="<?php echo esc_attr( $args['label_for'] ); ?>"
