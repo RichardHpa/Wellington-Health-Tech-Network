@@ -351,8 +351,6 @@ function customizer_style_output(){
             color: <?php echo get_theme_mod('header_text_setting', '#000000'); ?>;
         }
 
-
-
         header#header{
             background-color: <?php echo get_theme_mod('header_color_setting', '#228496'); ?>;
             <?php if(get_theme_mod('header_background_image_setting')): ?>
@@ -370,7 +368,8 @@ function customizer_style_output(){
             color: <?php echo get_theme_mod('front_text_color_setting', '#ffffff'); ?>;
         }
 
-        .menuIcon .bar{
+        .menuIcon .bar,
+        #sponsorsList h3{
             color: <?php echo get_theme_mod('front_text_color_setting', '#ffffff'); ?>;
         }
 

@@ -111,3 +111,39 @@ function meta_box_scripts() {
     ) );
 }
 add_action( 'admin_enqueue_scripts', 'meta_box_scripts' );
+
+
+
+
+
+function sponsors_init() {
+    $labels = array(
+        'name'               => _x( 'Sponsors', 'whtn' ),
+        'singular_name'      => _x( 'Sponsor', 'whtn' ),
+        'menu_name'          => _x( 'Sponsors', 'whtn' ),
+        'name_admin_bar'     => _x( 'Sponsor', 'whtn' ),
+        'add_new'            => _x( 'Add a new Sponsor', 'whtn' ),
+        'add_new_item'       => __( 'Add a new Sponsor', 'whtn' ),
+        'new_item'           => __( 'New Sponsor', 'whtn' ),
+        'edit_item'          => __( 'Edit Sponsor', 'whtn' ),
+        'view_item'          => __( 'View Sponsor', 'whtn' ),
+        'all_items'          => __( 'All Sponsors', 'whtn' ),
+        'search_items'       => __( 'Search Sponsors', 'whtn' ),
+        'parent_item_colon'  => __( 'Parent Sponsor:', 'whtn' ),
+        'not_found'          => __( 'No Sponsors found.', 'whtn' ),
+        'not_found_in_trash' => __( 'No Sponsors found in Trash.', 'whtn' )
+    );
+    $args = array(
+          'labels' => $labels,
+          'public' => false,
+          'show_ui' => true,
+          'capability_type' => 'post',
+          'hierarchical' => false,
+          'query_var' => false,
+        'menu_icon' => 'dashicons-groups',
+        'supports' => array(
+            'title')
+        );
+    register_post_type( 'sponsor', $args );
+}
+add_action( 'init', 'sponsors_init' );

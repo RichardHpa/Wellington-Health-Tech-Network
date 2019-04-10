@@ -157,7 +157,27 @@ $metaboxes = array(
             //     'size' => 100
             // )
         )
-    )
+    ),
+    'slide_image' => array(
+        'title' => __('Slide Image', 'whtn'),
+        'applicableto' => 'sponsor',
+        'location' => 'normal',
+        'priority' => 'low',
+        'fields' => array(
+            'sponsor_url' => array(
+                'title' => __('Sponsor Website url', 'whtn'),
+                'type' => 'text',
+                'description' => 'Include the url to the sponsors website',
+                'size' => 100
+            ),
+            'sponsor_image' => array(
+                'title' => __('Sponsor Image', 'whtn'),
+                'type' => 'upload_image',
+                'description' => 'Upload the sponsor image.',
+                'size' => 100
+            )
+        )
+    ),
 );
 
 function add_post_format_metabox() {

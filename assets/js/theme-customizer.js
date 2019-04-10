@@ -43,6 +43,7 @@
             $('#frontNav li a').css('color', newval);
             $('.textContent hr').css('border-color', newval);
             $('.menuIcon .bar').css('background-color', newval);
+            $('#sponsorsList h3').css('color', newval);
         } );
     } );
 

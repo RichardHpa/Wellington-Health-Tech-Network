@@ -38,7 +38,7 @@
                                      ?>
                                 </nav>
                             </header>
-                            
+
                             <?php if(get_theme_mod('alert_checkbox_setting')): ?>
                                 <?php if(get_theme_mod('alert_post_url_setting')): ?>
                                     <a href="<?php echo esc_url( get_permalink(get_theme_mod('alert_post_url_setting')) ); ?>">
@@ -52,6 +52,30 @@
                                 <?php if( (get_theme_mod('alert_post_url_setting')) ||  (get_theme_mod('alert_url_setting')) ): ?>
                                     </a>
                                 <?php endif; ?>
+                            <?php endif; ?>
+
+                            <?php
+                                $args = array(
+                                    'post_type' => 'sponsor',
+                                    'posts_per_page' => -1,
+                                );
+                                $sponsor = new WP_Query($args);
+                             ?>
+                            <?php if( $sponsor->have_posts() ):?>
+                                <div id="sponsorsList">
+                                    <h3>Our Sponsors</h3>
+                                    <?php while($sponsor->have_posts()): $sponsor->the_post();?>
+                                        <?php
+                                            $postID = get_the_ID();
+                                            $imageID =  get_post_meta( $postID, 'sponsor_image', true );
+                                        ?>
+                                        <div class="sponsorLogo">
+                                            <?php if(get_post_meta($postID, 'sponsor_url', true)): ?><a href="<?= get_post_meta($postID, 'sponsor_url', true); ?>" target="blank"><?php endif; ?>
+                                                <img src="<?= wp_get_attachment_image_src( $imageID, 'Thumbnail')[0]  ?>" alt="Our Sponsor - <?= the_title(); ?>" />
+                                            <?php if(get_post_meta($postID, 'sponsor_url', true)): ?></a><?php endif; ?>
+                                        </div>
+                                    <?php endwhile; ?>
+                                </div>
                             <?php endif; ?>
 
                             <div class="textContent">
