@@ -6942,7 +6942,7 @@ main {
     max-width: 400px;
     min-height: 50px;
     position: absolute;
-    top: 0;
+    top: 20px;
     right: 0;
     background-color: white;
     border-left-width: 5px;
@@ -7067,6 +7067,7 @@ main {
   max-height: 100vh;
   height: 100vh;
   width: 40vw;
+  padding: 20px;
   transform: translateX(-40vw);
   position: fixed;
   z-index: 1000;
@@ -7103,7 +7104,7 @@ main {
       color: #f1f1f1; }
   #myNav .closebtn {
     position: absolute;
-    top: 20px;
+    top: 0px;
     right: 45px;
     font-size: 60px; }
   #myNav #menu-main-menu {

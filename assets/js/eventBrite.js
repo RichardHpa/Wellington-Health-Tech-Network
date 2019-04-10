@@ -99,14 +99,22 @@ function createMap(lat, lng){
         disableDoubleClickZoom: true,
         disableDefaultUI: true,
         fullscreenControl: false,
-        scrollwheel: false,
         navigationControl: false,
         mapTypeControl: false,
         scaleControl: false,
-        draggable: false,
     });
-    var marker = new google.maps.Marker({position: {
-        lat: lat,
-        lng: lng
-    }, map: map});
+    var marker = new google.maps.Marker({
+        position: {
+            lat: lat,
+            lng: lng
+        },
+         map: map,
+         draggable:true,
+     });
+    google.maps.event.addListener( marker, 'dragend', function ( event ) {
+        console.log(this.getPosition().lat());
+        console.log(this.getPosition().lng());
+        $("#eventLat").val(this.getPosition().lat());
+        $("#eventLng").val(this.getPosition().lng());
+    } );
 }
