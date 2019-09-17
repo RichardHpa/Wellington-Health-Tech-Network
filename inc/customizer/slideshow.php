@@ -3,7 +3,7 @@
     function custom_customize_enqueue() {
     	wp_enqueue_script( 'rh_slideshow_customizer_script', get_template_directory_uri() . '/assets/js/front/customizer.min.js', array( 'jquery', 'customize-controls' ), false, true );
     	wp_localize_script('rh_slideshow_customizer_script', 'post_counts', array(
-    		'count'=> get_theme_mod('rh_slide_count_setting', 5)
+    		'count'=> get_theme_mod('whtn_slide_count_setting', 5)
     	));
     }
     add_action( 'customize_controls_enqueue_scripts', 'custom_customize_enqueue' );

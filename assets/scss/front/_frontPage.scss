@@ -1,0 +1,27 @@
+.home{
+    overflow: hidden;
+    .fullScreen{
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+        top: 0;
+        left: 0;
+
+        .backgroundSlider{
+            position:relative;
+            height: 100vh;
+            width: 100vw;
+            .slide{
+                position:absolute;
+                z-index:1;
+                background-position: center center;
+                background-size: cover;
+                width: 100vw;
+                height: 100vh;
+                &.active{
+                    z-index:3
+                }
+            }
+        }
+    }
+}

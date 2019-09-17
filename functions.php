@@ -7,6 +7,9 @@ function customThemeEnqueues(){
     wp_enqueue_script('jquery');
     wp_enqueue_script('bootstrapScript', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), '4.3.1', true);
     wp_enqueue_script('customScript', get_template_directory_uri() . '/assets/js/front/script.min.js', array('jquery'), '1.0.0', true);
+    wp_localize_script('customScript', 'local_values', array(
+        'duration'=> get_theme_mod('whtn_slide_speed_setting', 3)
+    ));
 }
 add_action('wp_enqueue_scripts', 'customThemeEnqueues', 11);
 
