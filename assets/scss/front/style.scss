@@ -1,1 +1,8 @@
-@import 'frontPage'
+
+@import 'variables';
+@import 'frontPage';
+
+.sub-menu{
+    padding: 0;
+    display: none;
+}

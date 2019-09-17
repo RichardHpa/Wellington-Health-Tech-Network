@@ -1,7 +1,7 @@
 <?php
 function customThemeEnqueues(){
     wp_enqueue_style('bootstrapStyle', get_template_directory_uri() . '/assets/css/bootstrap.min.css', array(), '4.3.1', 'all');
-    wp_enqueue_style('font-awesome', get_template_directory_uri() . '/assets/font-awesome/css/font-awesome.min.css', array(), '4.7.0', 'all' );
+    wp_enqueue_style('font-awesome', get_template_directory_uri() . '/assets/fontawesome/css/all.min.css', array(), '5.10.2', 'all' );
     wp_enqueue_style('customStyle', get_template_directory_uri() . '/assets/css/style.min.css', array(), '1.0.0', 'all');
 
     wp_enqueue_script('jquery');
@@ -24,3 +24,5 @@ add_action('admin_enqueue_scripts', 'admin_my_enqueue');
 require_once get_template_directory() . '/inc/theme_support.php';
 
 require_once get_template_directory() . '/inc/customizer.php';
+
+require get_parent_theme_file_path('/inc/walkers/class-wp-dropdown-child.php');

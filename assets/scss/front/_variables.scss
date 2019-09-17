@@ -1,0 +1,11 @@
+@mixin navFont{
+    font-family: 'Helvetica Neue';
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+@mixin flexCenter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
