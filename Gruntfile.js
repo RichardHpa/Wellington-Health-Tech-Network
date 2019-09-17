@@ -56,8 +56,10 @@ module.exports = function(grunt){
             }
         },
         jshint: {
-            files: ['assets/js/*/*.js'],
+            files: ['assets/js/*/*.js', '!assets/js/*/*.min.js'],
             options: {
+                esversion: 6,
+                sub: true,
                 globals:{
                     jQuery: true
                 }
@@ -74,7 +76,7 @@ module.exports = function(grunt){
                     dest: 'assets/js/front',
                     cwd: '.',
                     rename: function (dst, src) {
-                      return src.replace('.js', '.min.js');
+                        return src.replace('.js', '.min.js');
                     }
                 }]
             },
@@ -88,7 +90,7 @@ module.exports = function(grunt){
                     dest: 'assets/js/admin',
                     cwd: '.',
                     rename: function (dst, src) {
-                      return src.replace('.js', '.min.js');
+                        return src.replace('.js', '.min.js');
                     }
                 }]
             }
@@ -107,13 +109,17 @@ module.exports = function(grunt){
                 tasks : [ 'sass:bootstrap', 'csslint', 'cssmin' ]
             },
             frontJS : {
-               files : ['assets/js/front/script.js'],
-               tasks : ['jshint', 'uglify:front']
-           },
-           adminJS : {
-              files : ['assets/js/admin/admin.js'],
-              tasks : ['jshint', 'uglify:admin']
-           }
+                files : ['assets/js/front/script.js'],
+                tasks : ['jshint', 'uglify:front']
+            },
+            adminJS : {
+                files : ['assets/js/admin/admin.js'],
+                tasks : ['jshint', 'uglify:admin']
+            },
+            customizer: {
+                files: ['assets/js/front/customizer.js'],
+                tasks: ['jshint', 'uglify']
+            },
         },
     });
 
