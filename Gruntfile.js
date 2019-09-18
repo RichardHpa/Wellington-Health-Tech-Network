@@ -35,7 +35,13 @@ module.exports = function(grunt){
         csslint: {
             lax: {
                 options: {
-                    import: 2
+                    import: 2,
+                    'order-alphabetical': false,
+                    important: false,
+                    'box-sizing': false,
+                    'box-model': false,
+                    'universal-selector': false,
+                    'adjoining-classes': false
                 },
                 src: [
                     'assets/css/*.css',

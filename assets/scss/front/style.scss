@@ -1,8 +1,34 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    word-wrap: break-word;
+}
+
 
 @import 'variables';
 @import 'frontPage';
 
+.adminLoggedIn{
+    margin-top: 0!important;
+}
+
+a.navbar-brand{
+    white-space: normal;
+    &:hover{
+        opacity: 0.5;
+        text-decoration: underline;
+    }
+}
+
 .sub-menu{
+    border-top: 1px solid white;
     padding: 0;
     display: none;
+        li{
+            a{
+                font-size: 25px !important;
+            }
+        }
+
 }

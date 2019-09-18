@@ -25,4 +25,6 @@ require_once get_template_directory() . '/inc/theme_support.php';
 
 require_once get_template_directory() . '/inc/customizer.php';
 
+require_once get_template_directory() . '/inc/disable_gutenberg.php';
+
 require get_parent_theme_file_path('/inc/walkers/class-wp-dropdown-child.php');

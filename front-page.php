@@ -13,20 +13,61 @@
                 <div class="contentInner">
                     <header>
                         <nav>
-                            <?php
-                                $url = home_url();
-                                $custom_logo_id = get_theme_mod( 'custom_logo' );
-                                $logo = wp_get_attachment_image_src( $custom_logo_id , 'full' );
-                                if ( has_custom_logo() ) {
-                                        echo '<a class="navbar-brand" href="'.esc_url( $url ).'"><img src="'. esc_url( $logo[0] ) .'"height="50" class="d-inline-block align-top"></a>';
-                                } else {
-                                        echo '<a class="navbar-brand" href="'.esc_url( $url ).'">'. get_bloginfo( 'name' ) .'</a>';
-                                }
-                             ?>
+                            <div class="row">
+                                <div class="col">
+                                    <?php
+                                        $url = home_url();
+                                        $custom_logo_id = get_theme_mod( 'custom_logo' );
+                                        $logo = wp_get_attachment_image_src( $custom_logo_id , 'full' );
+                                        if ( has_custom_logo() ) {
+                                                echo '<a class="navbar-brand" href="'.esc_url( $url ).'"><img src="'. esc_url( $logo[0] ) .'"height="50" class="d-inline-block align-top"></a>';
+                                        } else {
+                                                echo '<a class="navbar-brand" href="'.esc_url( $url ).'">'. get_bloginfo( 'name' ) .'</a>';
+                                        }
+                                     ?>
+                                </div>
+                                <div class="col-12 col-md-6 d-none d-md-block">
+                                    <div class="notifications float-right">
+                                        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
+                                          <div class="toast-header">
+                                            <strong class="mr-auto">Bootstrap</strong>
+                                            <small class="text-muted">just now</small>
+                                            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+                                          <div class="toast-body">
+                                            See? Just like this.
+                                          </div>
+                                        </div>
+
+                                        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
+                                          <div class="toast-header">
+                                            <strong class="mr-auto">Bootstrap</strong>
+                                            <small class="text-muted">2 seconds ago</small>
+                                            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+                                          <div class="toast-body">
+                                            Heads up, toasts will stack automatically
+                                          </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </nav>
                     </header>
 
                     <footer>
+                        <?php if(have_posts()): ?>
+                            <div class="content">
+                                <?php while(have_posts()): the_post();?>
+                                    <?php the_content(); ?>
+                                <?php endwhile ?>
+                            </div>
+                        <?php endif; ?>
                         <hr>
                         <div class="menuIcon">
                            <div class="bar bar-1"></div>
@@ -36,9 +77,6 @@
                     </footer>
                 </div>
             </div>
-
-
-
 
             <!-- Background Slideshow -->
             <div class="backgroundSlider">
@@ -57,7 +95,8 @@
 
         </div>
 
-        <div id="hiddenNav" class="overlay">
+        <!-- Off Screen Navigation -->
+        <div class="hiddenNav overlay">
             <a class="closebtn"><i class="fas fa-times fa-2x"></i></a>
             <?php wp_nav_menu( array(
                 'theme_location'    => 'header_navigation',
