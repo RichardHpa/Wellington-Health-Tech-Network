@@ -27,4 +27,8 @@ require_once get_template_directory() . '/inc/customizer.php';
 
 require_once get_template_directory() . '/inc/disable_gutenberg.php';
 
+require_once get_template_directory() . '/inc/remove_comements.php';
+
+require_once get_template_directory() . '/inc/custom_settings.php';
+
 require get_parent_theme_file_path('/inc/walkers/class-wp-dropdown-child.php');
