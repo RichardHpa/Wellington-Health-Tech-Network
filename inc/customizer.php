@@ -4,4 +4,6 @@
 
     require_once get_template_directory() . '/inc/customizer/colours.php';
 
+    require_once get_template_directory() . '/inc/customizer/sidebarContent.php';
+
  ?>

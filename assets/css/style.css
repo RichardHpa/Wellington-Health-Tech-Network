@@ -199,6 +199,13 @@ header .navContainer .sub-menu li {
   text-align: left;
 }
 
+.card-img-header {
+  height: 300px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: center;
+}
+
 .pageContainer {
   min-height: 100vh;
   display: flex;
