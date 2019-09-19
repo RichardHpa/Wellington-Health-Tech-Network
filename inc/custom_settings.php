@@ -70,13 +70,11 @@ function apikey_options_page() {
         'manage_options',
         'api-keys',
         'apikey_options_page_html',
-        'dashicons-tickets-alt',
+        'dashicons-lock',
         76
     );
 }
 add_action( 'admin_menu', 'apikey_options_page' );
-
-
 
 function apikey_options_page_html() {
     // check user capabilities
