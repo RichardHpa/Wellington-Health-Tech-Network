@@ -24,7 +24,7 @@ function whtn_colours_customize_register( $wp_customize ) {
     	) )
     );
 
-    $wp_customize->add_setting('whtn_primary_text_setting', array(
+    $wp_customize->add_setting('whtn_front_text_setting', array(
         'default'   => '#ffffff',
         'priority'  => 10,
         'transport' => 'refresh',
@@ -32,11 +32,59 @@ function whtn_colours_customize_register( $wp_customize ) {
 
     $wp_customize->add_control(new WP_Customize_Color_Control(
         $wp_customize,
-        'whtn_primary_text_section',
+        'whtn_front_text_section',
         array(
-            'label'      => __( 'Primary Text Colour', 'whtn' ),
+            'label'      => __( 'Front Text Colour', 'whtn' ),
             'section'    => 'whtn_colours_section',
-            'settings'   => 'whtn_primary_text_setting',
+            'settings'   => 'whtn_front_text_setting',
+        ) )
+    );
+
+    $wp_customize->add_setting('whtn_header_background_setting', array(
+        'default'   => '#3EA86F',
+        'priority'  => 10,
+        'transport' => 'refresh',
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Color_Control(
+        $wp_customize,
+        'whtn_header_background_section',
+        array(
+            'label'      => __( 'Header Background Colour', 'whtn' ),
+            'section'    => 'whtn_colours_section',
+            'settings'   => 'whtn_header_background_setting',
+        ) )
+    );
+
+    $wp_customize->add_setting('whtn_footer_background_setting', array(
+        'default'   => '#3EA86F',
+        'priority'  => 10,
+        'transport' => 'refresh',
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Color_Control(
+        $wp_customize,
+        'whtn_footer_background_section',
+        array(
+            'label'      => __( 'Footer Background Colour', 'whtn' ),
+            'section'    => 'whtn_colours_section',
+            'settings'   => 'whtn_footer_background_setting',
+        ) )
+    );
+
+    $wp_customize->add_setting('whtn_button_colour_setting', array(
+        'default'   => '#3EA86F',
+        'priority'  => 10,
+        'transport' => 'refresh',
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Color_Control(
+        $wp_customize,
+        'whtn_button_colour_section',
+        array(
+            'label'      => __( 'Button Colour', 'whtn' ),
+            'section'    => 'whtn_colours_section',
+            'settings'   => 'whtn_button_colour_setting',
         ) )
     );
 
@@ -49,13 +97,31 @@ function whtn_customizer_style_output(){
     ?>
         <style>
             .navbar-brand,
-            .navbar-brand:hover{
+            .navbar-brand:hover,
+            .navContainer .menu li a{
                 color: <?php echo get_theme_mod('whtn_header_text_setting', '#ffffff'); ?>;
             }
 
-            p{
-                color: <?php echo get_theme_mod('whtn_primary_text_setting', '#ffffff'); ?>;
+            .home p{
+                color: <?php echo get_theme_mod('whtn_front_text_section', '#ffffff'); ?>;
             }
+
+            .header,
+            .header .sub-menu{
+                background-color: <?php echo get_theme_mod('whtn_header_background_setting', '#3EA86F'); ?>;
+            }
+
+            .footer{
+                background-color: <?php echo get_theme_mod('whtn_footer_background_setting', '#3EA86F'); ?>;
+            }
+
+            .btn-whtn,
+            .page-link.current{
+                background-color: <?php echo get_theme_mod('whtn_button_colour_setting', '#3EA86F'); ?>;
+                border-color: <?php echo get_theme_mod('whtn_button_colour_setting', '#3EA86F'); ?>;
+            }
+
+
         </style>
     <?php
 }

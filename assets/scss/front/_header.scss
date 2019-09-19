@@ -1,0 +1,31 @@
+header{
+    .navContainer{
+        display: flex;
+        padding-top: 0.3125rem;
+        padding-bottom: 0.3125rem;
+        .menu{
+            list-style: none;
+                padding: 0;
+                display: flex;
+                margin: 0;
+                flex-direction: row;
+            li{
+
+                a{
+                    padding: .5rem 1rem;
+                }
+            }
+        }
+        .sub-menu{
+            position: absolute;
+            display: none;
+            margin-top: 5px;
+            padding: .5rem 1rem;
+            list-style: none;
+            li{
+                padding: 5px;
+                text-align: left;
+            }
+        }
+    }
+}

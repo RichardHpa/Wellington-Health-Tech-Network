@@ -30,7 +30,7 @@
                     width: 70%;
                     text-align: left;
                 }
-                header{
+                .frontHeader{
                     @include navFont;
                     height: 20%;
                     @media screen and (min-width: 768px){
@@ -38,7 +38,7 @@
                     }
                 }
 
-                footer{
+                .frontFooter{
                     height: 80%;
                     width: 100%;
                     display: flex;

@@ -11,7 +11,7 @@
 
             <div class="contentContainer">
                 <div class="contentInner">
-                    <header>
+                    <div class="frontHeader">
                         <nav>
                             <div class="row">
                                 <div class="col">
@@ -58,9 +58,9 @@
                             </div>
 
                         </nav>
-                    </header>
+                    </div>
 
-                    <footer>
+                    <div class="frontFooter">
                         <?php if(have_posts()): ?>
                             <div class="content">
                                 <?php while(have_posts()): the_post();?>
@@ -74,7 +74,7 @@
                            <div class="bar bar-2"></div>
                            <div class="bar bar-3"></div>
                        </div>
-                    </footer>
+                   </div>
                 </div>
             </div>
 

@@ -5,18 +5,26 @@
     word-wrap: break-word;
 }
 
-
 @import 'variables';
 @import 'frontPage';
+@import 'header';
+@import 'footer';
 
-.adminLoggedIn{
-    margin-top: 0!important;
+// .adminLoggedIn{
+//     margin-top: 0!important;
+// }
+
+
+.pageContainer{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 a.navbar-brand{
     white-space: normal;
     &:hover{
-        opacity: 0.5;
         text-decoration: underline;
     }
 }
@@ -25,10 +33,14 @@ a.navbar-brand{
     border-top: 1px solid white;
     padding: 0;
     display: none;
-        li{
-            a{
-                font-size: 25px !important;
-            }
+    li{
+        a{
+            // font-size: 25px !important;
         }
+    }
+}
 
+.btn-whtn,
+.page-link.current{
+    color: #fff;
 }
