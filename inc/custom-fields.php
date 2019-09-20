@@ -11,9 +11,15 @@ $metaboxes = array(
                 'type' => 'eventSelect',
                 'description' => 'You need to add an event to eventbrite first, then come here and select the event you are wanting to add.'
             ),
+            'eventBio' => array(
+                'title' => 'Event Bio',
+                'type' => 'textarea',
+                'rows' => 5
+            ),
             'eventDescription' => array(
                 'title' => 'Event Description',
-                'type' => 'eventTextarea'
+                'type' => 'wysiwyg',
+                'rows' => 10
             ),
             'eventStartTime' => array(
                 'title' => 'Event Start Time (NZST)',
@@ -70,10 +76,10 @@ function show_metaboxes($post, $args){
                         $output .= '<option value="">--Choose an Event--</option>';
                     $output .= '</select>';
                 break;
-                case 'eventTextarea':
-                    $output .= '<div class="form-group hide" id="eventDescription">';
+                case 'textarea':
+                    $output .= '<div class="form-group hide" id="'.$id.'">';
                         $output .= '<label for="'.$id.'" class="customLabel">'.$field['title'].'</label>';
-                        $output .= '<textarea name="'.$id.'" class="EventDecs" rows="10">'.$customValues[$id][0].'</textarea>';
+                        $output .= '<textarea name="'.$id.'" class="EventDecs" rows="'.$field['rows'].'">'.$customValues[$id][0].'</textarea>';
                     $output .= '</div>';
                 break;
                 case 'eventTime':
@@ -101,6 +107,16 @@ function show_metaboxes($post, $args){
                 break;
                 case 'hidden':
                     $output .= '<input id="'.$id.'" type="hidden" name="'.$id.'" class="customInput" value="'.$customValues[$id][0].'">';
+                 break;
+                 case 'wysiwyg':
+                     ob_start();
+                         echo wp_editor('',$id.'Editor', array('media_buttons' => false));
+                         $wysiwygEditor = ob_get_contents();
+                     ob_end_clean();
+                     $output .= '<div class="form-group hide" id="'.$id.'">';
+                        $output .= $wysiwygEditor;
+                    $output .= '</div>';
+
                  break;
                 default:
                     $output .= '<div class="form-group">';

@@ -4,7 +4,7 @@
             <div class="col-12 col-md-3">
                 <div class="card p-4">
                     <?php $sidebarImg = get_theme_mod('whtn_sidebar_image_setting');?>
-                    <img src="<?=$sidebarImg ?>" class="img-fluid">
+                    <img src="<?=$sidebarImg ?>" class="img-fluid align-self-center">
                     <p class="mt-3"><?= get_theme_mod('whtn_sidebar_text_setting'); ?></p>
                 </div>
             </div>

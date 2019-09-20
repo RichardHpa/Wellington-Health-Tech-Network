@@ -2,6 +2,10 @@
   box-sizing: border-box;
 }
 
+#eventDescriptionEditor_ifr {
+  min-height: 250px !important;
+}
+
 .customField {
   padding: 3px 8px;
   height: 1.7em;
@@ -28,12 +32,6 @@
   font-weight: bold;
 }
 
-.form-group {
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 10px;
-  margin-bottom: 10px;
-}
-
 .alwaysHidden {
   display: none !important;
 }
@@ -49,24 +47,10 @@
   display: none;
 }
 
-#eventDescription {
-  display: none;
-}
-#eventDescription .EventDecs {
-  padding: 3px 8px;
-  width: 100%;
-  outline: 0;
-  margin: 0 0 3px;
-  background-color: #fff;
-  margin: 10px 0;
-}
-
 .loader {
   margin: 0 auto;
   border: 5px solid #f3f3f3;
-  /* Light grey */
   border-top: 5px solid #555;
-  /* Blue */
   border-radius: 50%;
   width: 30px;
   height: 30px;
@@ -87,4 +71,20 @@
 
 .hide {
   display: none;
+}
+
+.form-group {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+.form-group textarea {
+  overflow: auto;
+  resize: vertical;
+  width: 100%;
+  padding: 3px 8px;
+  outline: 0;
+  margin: 0 0 3px;
+  background-color: #fff;
+  margin: 10px 0;
 }

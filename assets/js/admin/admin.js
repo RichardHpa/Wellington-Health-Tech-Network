@@ -1,7 +1,8 @@
 $ = jQuery;
-
+// console.log(variables);
 if(variables['eventBriteKey']){
     if($('#eventSelect').length){
+        console.log('https://www.eventbriteapi.com/v3/users/me/events/?token='+variables['eventBriteKey']);
         $.ajax({
             url: 'https://www.eventbriteapi.com/v3/users/me/events/?token='+variables['eventBriteKey'],
             dataType: 'json',
@@ -16,8 +17,22 @@ if(variables['eventBriteKey']){
                     }
                     $('#eventSelect').append('<option '+selected+' value="'+events[i].id+'">'+events[i].name['text']+'</option>');
                 }
-                $('.loader').remove();
                 $('#eventSelect').fadeIn();
+                if(variables['pageType'] === 'edit'){
+                    var editLat = $("#eventLat").val();
+                    var editLng = $("#eventLng").val();
+                    $('#eventStartTimeSelect').dateTimePicker({
+                        selectData: $("#eventStartTime").val()
+                    });
+                    $('#eventEndTimeSelect').dateTimePicker({
+                        selectData: $("#eventEndTime").val()
+                    });
+                    createMap(Number(editLat), Number(editLng));
+                    $("#map").fadeIn();
+                    $(".form-group").fadeIn();
+                }
+                $('.loader').remove();
+
             },
             error:function(error){
                 console.log(error);
@@ -33,23 +48,40 @@ if(variables['eventBriteKey']){
                     url: 'https://www.eventbriteapi.com/v3/events/'+value+'/?token='+variables['eventBriteKey']+'&expand=venue',
                     dataType: 'json',
                     success:function(event){
-                        console.log(event.venue['address'].latitude);
-                        $("#title").val(event.name['text']).blur();
+                        const eventDetails = event;
+                        console.log(eventDetails);
+                        $.ajax({
+                            url: 'https://www.eventbriteapi.com/v3/events/'+eventDetails.id+'/description/?token='+variables['eventBriteKey'],
+                            dataType: 'json',
+                            success:function(moreDetails){
+                                console.log(moreDetails);
+                                // console.log(tinymce["editors"].eventDescriptionEditor).setContent(moreDetails);
+                                tinymce["editors"].eventDescriptionEditor.setContent(moreDetails.description);
+                                // $('.eventDescriptionEditor').empty().append(moreDetails);
+
+                            },
+                            error:function(err){
+                                console.log(err);
+                                console.log('error in getting more info about the event');
+                            }
+                        });
+
+                        $("#title").val(eventDetails.name['text']).blur();
                         $('#title-prompt-text').addClass('screen-reader-text');
-                        $("#eventDescription").find('textarea').val(event.description['text']);
-                        $("#eventStartTime").val(event.start['local']);
-                        $("#eventEndTime").val(event.end['local']);
+                        $("#eventBio").find('textarea').val(eventDetails.description['text']);
+                        $("#eventStartTime").val(eventDetails.start['local']);
+                        $("#eventEndTime").val(eventDetails.end['local']);
                         $('#eventStartTimeSelect').dateTimePicker({
                             selectData: $("#eventStartTime").val()
                         });
                         $('#eventEndTimeSelect').dateTimePicker({
                             selectData: $("#eventEndTime").val()
                         });
-                        $("#eventLocation").val(event.venue['address'].localized_address_display);
-                        $("#eventLat").val(event.venue['address'].latitude);
-                        $("#eventLng").val(event.venue['address'].longitude);
-                        $("#eventLink").val(event.url);
-                        createMap(Number(event.venue['address'].latitude), Number(event.venue['address'].longitude));
+                        $("#eventLocation").val(eventDetails.venue['address'].localized_address_display);
+                        $("#eventLat").val(eventDetails.venue['address'].latitude);
+                        $("#eventLng").val(eventDetails.venue['address'].longitude);
+                        $("#eventLink").val(eventDetails.url);
+                        createMap(Number(eventDetails.venue['address'].latitude), Number(eventDetails.venue['address'].longitude));
                         $('.loader').remove();
                         $("#map").fadeIn();
                         $(".form-group").fadeIn();
@@ -61,6 +93,9 @@ if(variables['eventBriteKey']){
             }
         });
     }
+} else {
+    $('.loader').remove();
+    $('#normal-sortables .inside').append('<p>You need to include a Eventbrite API Key to add an event.</p>');
 }
 
 
@@ -80,13 +115,26 @@ function createMap(lat, lng){
             lat: lat,
             lng: lng
         },
-         map: map,
-         draggable:true,
-     });
+        map: map,
+        draggable:true,
+    });
     google.maps.event.addListener( marker, 'dragend', function ( event ) {
-        console.log(this.getPosition().lat());
-        console.log(this.getPosition().lng());
+        console.log(this);
         $("#eventLat").val(this.getPosition().lat());
         $("#eventLng").val(this.getPosition().lng());
+        geocodePosition(marker.getPosition());
     } );
+
+    function geocodePosition(pos) {
+        let geocoder = new google.maps.Geocoder();
+        geocoder.geocode({
+            latLng: pos
+        }, function(responses) {
+            if (responses && responses.length > 0) {
+                $("#eventLocation").val(responses[0].formatted_address);
+            } else {
+                console.log('Cannot determine address at this location.');
+            }
+        });
+    }
 }
