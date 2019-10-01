@@ -26,7 +26,8 @@ function events_init() {
         'query_var' => true,
         'menu_icon' => 'dashicons-tickets-alt',
         'supports' => array(
-            'title')
+            'title',
+            'thumbnail')
         );
     register_post_type( 'event', $args );
 }

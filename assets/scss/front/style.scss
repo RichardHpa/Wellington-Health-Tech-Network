@@ -9,6 +9,7 @@
 @import 'frontPage';
 @import 'header';
 @import 'footer';
+@import 'calendar';
 
 .card-img-header{
     height: 300px;
@@ -40,4 +41,24 @@ a.navbar-brand{
 .btn-whtn,
 .page-link.current{
     color: #fff;
+}
+
+.eventCard{
+    border: 0px;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    .row{
+        margin-bottom: 10px;
+        padding-left: 10px;
+        border-left: 5px solid rgba(0,0,0,.125);
+    }
+    &:hover{
+        cursor: pointer;
+        text-decoration: none;
+    }
+    &:last-child{
+        border-bottom: none;
+    }
+    a{
+        color: black;
+    }
 }

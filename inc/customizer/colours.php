@@ -116,8 +116,19 @@ function whtn_customizer_style_output(){
             }
 
             .btn-whtn,
-            .page-link.current{
+            .page-link.current,
+            .fc-prev-button,
+            .fc-next-button{
                 background-color: <?php echo get_theme_mod('whtn_button_colour_setting', '#3EA86F'); ?>;
+                border-color: <?php echo get_theme_mod('whtn_button_colour_setting', '#3EA86F'); ?>;
+            }
+
+            .fc-event,
+            .fc-event-dot{
+                background-color: <?php echo get_theme_mod('whtn_button_colour_setting', '#3EA86F'); ?>;
+            }
+
+            .eventCard .row:hover{
                 border-color: <?php echo get_theme_mod('whtn_button_colour_setting', '#3EA86F'); ?>;
             }
 

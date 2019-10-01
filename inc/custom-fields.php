@@ -71,59 +71,60 @@ function show_metaboxes($post, $args){
         foreach ($fields as $id => $field) {
             switch($field['type']){
                 case 'eventSelect':
-                    $output .= '<div class="loader"></div>';
-                    $output .= '<select id="eventSelect" name="'.$id.'" class="customField">';
-                        $output .= '<option value="">--Choose an Event--</option>';
-                    $output .= '</select>';
+                $output .= '<div class="loader"></div>';
+                $output .= '<select id="eventSelect" name="'.$id.'" class="customField">';
+                $output .= '<option value="">--Choose an Event--</option>';
+                $output .= '</select>';
                 break;
                 case 'textarea':
-                    $output .= '<div class="form-group hide" id="'.$id.'">';
-                        $output .= '<label for="'.$id.'" class="customLabel">'.$field['title'].'</label>';
-                        $output .= '<textarea name="'.$id.'" class="EventDecs" rows="'.$field['rows'].'">'.$customValues[$id][0].'</textarea>';
-                    $output .= '</div>';
+                $output .= '<div class="form-group hide" id="'.$id.'">';
+                $output .= '<label for="'.$id.'" class="customLabel">'.$field['title'].'</label>';
+                $output .= '<textarea name="'.$id.'" class="EventDecs" rows="'.$field['rows'].'">'.$customValues[$id][0].'</textarea>';
+                $output .= '</div>';
                 break;
                 case 'eventTime':
-                    $output .= '<div class="form-group hide">';
-                        $output .= '<label for="'.$id.'" class="customLabel">'.$field['title'].'</label>';
-                        $output .= '<div id="'.$id.'Select" class="customInput"> </div>';
-                        $output .= '<input id="'.$id.'" name="'.$id.'" type="hidden" value="'.$customValues[$id][0].'">';
-                    $output .= '</div>';
+                $output .= '<div class="form-group hide">';
+                $output .= '<label for="'.$id.'" class="customLabel">'.$field['title'].'</label>';
+                $output .= '<div id="'.$id.'Select" class="customInput"> </div>';
+                $output .= '<input id="'.$id.'" name="'.$id.'" type="hidden" value="'.$customValues[$id][0].'">';
+                $output .= '</div>';
                 break;
                 case 'eventLocation':
-                    $output .= '<div class="form-group hide">';
-                        $output .= '<label for="'.$id.'" class="customLabel">'.$field['title'].'</label>';
-                        $output .= '<input id="'.$id.'" type="text" name="'.$id.'" class="customInput" value="'.$customValues[$id][0].'">';
-                    $output .= '</div>';
+                $output .= '<div class="form-group hide">';
+                $output .= '<label for="'.$id.'" class="customLabel">'.$field['title'].'</label>';
+                $output .= '<input id="'.$id.'" type="text" name="'.$id.'" class="customInput" value="'.$customValues[$id][0].'">';
+                $output .= '</div>';
                 break;
                 case 'eventLatLng':
-                    $output .= '<div class="form-group alwaysHidden">';
-                        $output .= '<label for="'.$id.'" class="customLabel">'.$field['title'].'</label>';
-                        $output .= '<input id="'.$id.'" type="text" name="'.$id.'" class="customInput" value="'.$customValues[$id][0].'">';
-                    $output .= '</div>';
+                $output .= '<div class="form-group alwaysHidden">';
+                $output .= '<label for="'.$id.'" class="customLabel">'.$field['title'].'</label>';
+                $output .= '<input id="'.$id.'" type="text" name="'.$id.'" class="customInput" value="'.$customValues[$id][0].'">';
+                $output .= '</div>';
                 break;
                 case 'eventMap':
-                    $output .= '<div id="map" class="hide">';
-                    $output .= '</div>';
+                $output .= '<div id="map" class="hide">';
+                $output .= '</div>';
                 break;
                 case 'hidden':
-                    $output .= '<input id="'.$id.'" type="hidden" name="'.$id.'" class="customInput" value="'.$customValues[$id][0].'">';
-                 break;
-                 case 'wysiwyg':
-                     ob_start();
-                         echo wp_editor('',$id.'Editor', array('media_buttons' => false));
-                         $wysiwygEditor = ob_get_contents();
-                     ob_end_clean();
-                     $output .= '<div class="form-group hide" id="'.$id.'">';
-                        $output .= $wysiwygEditor;
-                    $output .= '</div>';
+                $output .= '<input id="'.$id.'" type="hidden" name="'.$id.'" class="customInput" value="'.$customValues[$id][0].'">';
+                break;
+                case 'wysiwyg':
+                ob_start();
+                echo '<label class="customLabel">Event Description</label>';
+                echo wp_editor($customValues['eventDescriptionEditor'][0],$id.'Editor', array('media_buttons' => false));
+                $wysiwygEditor = ob_get_contents();
+                ob_end_clean();
+                $output .= '<div class="form-group hide" id="'.$id.'">';
+                $output .= $wysiwygEditor;
+                $output .= '</div>';
 
-                 break;
+                break;
                 default:
-                    $output .= '<div class="form-group">';
-                        $output .= '<label for="'.$id.'" class="customLabel">'.$field['title'].'</label>';
-                        $output .= '<p>'.$field['description'].'</p>';
-                        $output .= '<input id="'.$id.'" type="text" name="'.$id.'" class="customInput" value="'.$customValues[$id][0].'">';
-                    $output .= '</div>';
+                $output .= '<div class="form-group">';
+                $output .= '<label for="'.$id.'" class="customLabel">'.$field['title'].'</label>';
+                $output .= '<p>'.$field['description'].'</p>';
+                $output .= '<input id="'.$id.'" type="text" name="'.$id.'" class="customInput" value="'.$customValues[$id][0].'">';
+                $output .= '</div>';
                 break;
             }
         }
@@ -146,6 +147,7 @@ function save_metaboxes($postID){
         return $postID;
     }
     $post_type = get_post_type();
+
     foreach($metaboxes as $id => $metabox){
         if( $metabox['applicableto'] == $post_type ){
             $fields = $metaboxes[$id]['fields'];
@@ -165,10 +167,17 @@ function save_metaboxes($postID){
     } else {
         delete_post_meta( $postID, 'externalLinkImageURL');
     }
+
     if($_POST['externalLinkHeading']){
         update_post_meta( $postID, 'externalLinkHeading', $_POST['externalLinkHeading'] );
     } else {
         delete_post_meta( $postID, 'externalLinkHeading');
+    }
+
+    if($_POST['eventDescriptionEditor']){
+        update_post_meta($postID, 'eventDescriptionEditor', $_POST['eventDescriptionEditor']);
+    } else {
+        delete_post_meta( $postID, 'eventDescriptionEditor');
     }
 }
 add_action('save_post', 'save_metaboxes');
