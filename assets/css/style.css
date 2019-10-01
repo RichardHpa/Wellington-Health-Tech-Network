@@ -308,3 +308,13 @@ a.navbar-brand:hover {
 .eventCard a {
   color: black;
 }
+
+li {
+  list-style-position: inside;
+}
+
+#map {
+  width: 100%;
+  height: 300px;
+  background-color: grey;
+}

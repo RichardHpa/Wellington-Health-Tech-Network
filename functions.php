@@ -5,6 +5,7 @@ function customThemeEnqueues(){
     wp_enqueue_script('jquery');
 
     wp_enqueue_style('bootstrapStyle', get_template_directory_uri() . '/assets/css/bootstrap.min.css', array(), '4.3.1', 'all');
+    wp_enqueue_script('popperjs', get_template_directory_uri() . '/assets/js/popper.min.js', array(), '1.0.0', true);
     wp_enqueue_script('bootstrapScript', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), '4.3.1', true);
 
     wp_enqueue_style('font-awesome', get_template_directory_uri() . '/assets/fontawesome/css/all.min.css', array(), '5.10.2', 'all' );
@@ -20,6 +21,10 @@ function customThemeEnqueues(){
     wp_enqueue_script('calendarPluginScriptList', get_template_directory_uri() . '/assets/fullcalendar-4.3.1/packages/list/main.min.js', array(), '4.3.1', true);
     wp_enqueue_script('calendarPluginScriptBootstrap', get_template_directory_uri() . '/assets/fullcalendar-4.3.1/packages/bootstrap/main.min.js', array(), '4.3.1', true);
 
+    $options = get_option( 'apikey_options' );
+    wp_enqueue_script( 'google_js', 'https://maps.googleapis.com/maps/api/js?v=3.exp&key='.$options['apikey_field_google'].'&libraries=places', array(), '', true );
+
+    wp_enqueue_script('icalScript', get_template_directory_uri() . '/assets/js/ics.min.js', array(), '1.0.0', true);
 
     wp_enqueue_style('customStyle', get_template_directory_uri() . '/assets/css/style.min.css', array(), '1.0.0', 'all');
     wp_enqueue_script('customScript', get_template_directory_uri() . '/assets/js/front/script.min.js', array('jquery'), '1.0.0', true);
