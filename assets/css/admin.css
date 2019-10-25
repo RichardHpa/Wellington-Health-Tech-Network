@@ -30,6 +30,11 @@
 
 .customLabel {
   font-weight: bold;
+  display: block;
+}
+
+.customUpload {
+  margin: 10px 0 !important;
 }
 
 .alwaysHidden {

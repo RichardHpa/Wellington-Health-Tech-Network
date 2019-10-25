@@ -200,7 +200,7 @@ header .navContainer .sub-menu li {
 }
 
 .fc-event {
-  display: block;
+  display: none;
   padding: 0;
   margin: 0 auto;
 }
@@ -216,6 +216,11 @@ header .navContainer .sub-menu li {
   text-decoration: underline;
   background-color: transparent;
   border-color: transparent;
+}
+
+.fc-dayGrid-view .fc-body .fc-row {
+  display: flex;
+  align-items: center;
 }
 
 .fc th {

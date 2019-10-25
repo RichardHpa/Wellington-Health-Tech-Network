@@ -1,5 +1,5 @@
 $ = jQuery;
-// console.log(variables);
+
 if(variables['eventBriteKey']){
     if($('#eventSelect').length){
         console.log('https://www.eventbriteapi.com/v3/users/me/events/?token='+variables['eventBriteKey']);
@@ -55,10 +55,7 @@ if(variables['eventBriteKey']){
                             dataType: 'json',
                             success:function(moreDetails){
                                 console.log(moreDetails);
-                                // console.log(tinymce["editors"].eventDescriptionEditor).setContent(moreDetails);
                                 tinymce["editors"].eventDescriptionEditor.setContent(moreDetails.description);
-                                // $('.eventDescriptionEditor').empty().append(moreDetails);
-
                             },
                             error:function(err){
                                 console.log(err);
@@ -138,3 +135,41 @@ function createMap(lat, lng){
         });
     }
 }
+
+
+$(document).on('click', '.customUpload', function(e){
+    e.preventDefault();
+    const button = $(this);
+    const formGroup = $(this).parent('.form-group');
+    const types = formGroup.data('type').split(',');
+    let items_frame;
+    if ( items_frame ) {
+        items_frame.open();
+        return;
+    }
+    items_frame = wp.media.frames.items = wp.media({
+        title: 'Add to Gallery',
+        button: {
+            text: 'Select or Upload Media'
+        },
+        library: {
+            type: types
+        },
+    });
+    items_frame.open();
+    items_frame.on( 'select', function() {
+        var attachment = items_frame.state().get('selection').first().toJSON();
+        console.log(attachment.type);
+        // if(attachment.type !== 'audio'){
+        //     formGroup.prepend('<p class="errors">Error: must be a audio clip</p>');
+        // } else {
+        //     formGroup.find('.hiddenCustomInput').val(attachment.id);
+        //     formGroup.find('source').attr('src', attachment.url);
+        //     var player = formGroup.find('audio');
+        //     player.get(0).pause();
+        //     player.get(0).load();
+        //     formGroup.removeClass('noAudio').addClass('validAudio');
+        //     formGroup.find('.removeButton').show();
+        // }
+    });
+});

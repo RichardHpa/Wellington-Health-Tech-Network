@@ -32,3 +32,38 @@ function events_init() {
     register_post_type( 'event', $args );
 }
 add_action( 'init', 'events_init' );
+
+
+function podcasts_init() {
+    $labels = array(
+        'name'               => _x( 'Postcasts', 'whtn' ),
+        'singular_name'      => _x( 'Podcast', 'whtn' ),
+        'menu_name'          => _x( 'Podcasts', 'whtn' ),
+        'name_admin_bar'     => _x( 'Podcast', 'whtn' ),
+        'add_new'            => _x( 'Add a new Podcast', 'whtn' ),
+        'add_new_item'       => __( 'Add a new Podcast', 'whtn' ),
+        'new_item'           => __( 'New Podcast', 'whtn' ),
+        'edit_item'          => __( 'Edit Podcast', 'whtn' ),
+        'view_item'          => __( 'View Podcast', 'whtn' ),
+        'all_items'          => __( 'All Podcasts', 'whtn' ),
+        'search_items'       => __( 'Search Podcasts', 'whtn' ),
+        'parent_item_colon'  => __( 'Parent Podcast:', 'whtn' ),
+        'not_found'          => __( 'No Podcasts found.', 'whtn' ),
+        'not_found_in_trash' => __( 'No Podcasts found in Trash.', 'whtn' )
+    );
+    $args = array(
+      'labels' => $labels,
+        'public' => true,
+        'show_ui' => true,
+        'capability_type' => 'post',
+        'hierarchical' => true,
+        'query_var' => true,
+        'menu_icon' => 'dashicons-microphone',
+        'supports' => array(
+            'title',
+            'editor',
+            'thumbnail')
+        );
+    register_post_type( 'podcast', $args );
+}
+add_action( 'init', 'podcasts_init' );

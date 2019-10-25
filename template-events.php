@@ -4,8 +4,9 @@ get_header();
 ?>
 <div class="container mt-5">
     <div class="row">
-        <div class="col-12 col-md-3">
+        <div class="col-12 col-md-4 col-lg-3">
             <div id="calendar"></div>
+            <button id="showAllEvents" class="btn btn-whtn btn-block btn-sm">Show All</button>
         </div>
         <div class="col-12 col-md">
             <div class="row">
@@ -34,7 +35,7 @@ get_header();
             ?>
             <?php if( $allEvents->have_posts() ): ?>
                 <div class="row">
-                    <div class="col-12">
+                    <div id="eventsList" class="col-12">
                         <?php $today = date("Y/m/d") ?>
                         <?php while($allEvents->have_posts()): $allEvents->the_post();?>
                             <div class="card mb-3 rounded-0 eventCard">
@@ -43,7 +44,7 @@ get_header();
                                         <div class="col-md">
                                             <div class="card-body">
                                                 <h5 class="card-title mb-0"><?php the_title(); ?></h5>
-                                                <p class="card-text mb-0"><small class="text-muted"><?= date("g:i a",strtotime(get_post_meta(get_the_ID(), 'eventStartTime', true)));?></small></p>
+                                                <p class="card-text mb-0"><small class="text-muted"><?= date("g:i A",strtotime(get_post_meta(get_the_ID(), 'eventStartTime', true)));?></small></p>
                                                 <p class="card-text"><?= get_post_meta(get_the_ID(), 'eventBio', true); ?></p>
                                             </div>
                                         </div>

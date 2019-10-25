@@ -2,13 +2,6 @@
     box-sizing: border-box;
 }
 
-// .createpost-editor-custom{
-//     display: none;
-// }
-// #custom_editor{
-//     display: none;
-// }
-
 #eventDescriptionEditor_ifr{
     min-height: 250px !important;
 }
@@ -37,8 +30,12 @@
 
 .customLabel{
     font-weight: bold;
+    display: block;
 }
 
+.customUpload{
+    margin: 10px 0 !important;
+}
 .alwaysHidden{
     display: none !important;
 }
@@ -53,18 +50,6 @@
 #eventSelect{
     display: none;
 }
-
-// #eventDescription{
-//     display: none;
-//     .EventDecs{
-//         padding: 3px 8px;
-//         width: 100%;
-//         outline: 0;
-//         margin: 0 0 3px;
-//         background-color: #fff;
-//         margin: 10px 0;
-//     }
-// }
 
 .loader {
     margin: 0 auto;
@@ -103,4 +88,8 @@
         background-color: #fff;
         margin: 10px 0;
     }
+}
+
+.customUpload{
+
 }

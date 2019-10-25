@@ -1,5 +1,5 @@
 <?php
-define(’WP_POST_REVISIONS’, false);
+// define(’WP_POST_REVISIONS’, false);
 
 function customThemeEnqueues(){
     wp_enqueue_script('jquery');
@@ -12,14 +12,13 @@ function customThemeEnqueues(){
 
     wp_enqueue_style('calendarPluginStyle', get_template_directory_uri() . '/assets/fullcalendar-4.3.1/packages/core/main.css', array(), '4.3.1', 'all');
     wp_enqueue_style('calendarPluginStyleDay', get_template_directory_uri() . '/assets/fullcalendar-4.3.1/packages/daygrid/main.css', array(), '4.3.1', 'all');
-    wp_enqueue_style('calendarPluginStyleList', get_template_directory_uri() . '/assets/fullcalendar-4.3.1/packages/list/main.min.css', array(), '4.3.1', 'all');
     wp_enqueue_style('calendarPluginStyleBootstrap', get_template_directory_uri() . '/assets/fullcalendar-4.3.1/packages/bootstrap/main.min.css', array(), '4.3.1', 'all');
 
     wp_enqueue_script('momentScript', get_template_directory_uri() . '/assets/js/moment.js', array(), '1.0.0', true);
-    wp_enqueue_script('calendarPluginScript', get_template_directory_uri() . '/assets/fullcalendar-4.3.1/packages/core/main.js', array(), '4.3.1', true);
-    wp_enqueue_script('calendarPluginScriptDay', get_template_directory_uri() . '/assets/fullcalendar-4.3.1/packages/daygrid/main.min.js', array(), '4.3.1', true);
-    wp_enqueue_script('calendarPluginScriptList', get_template_directory_uri() . '/assets/fullcalendar-4.3.1/packages/list/main.min.js', array(), '4.3.1', true);
+    wp_enqueue_script('calendarPluginScript', get_template_directory_uri() . '/assets/fullcalendar-4.3.1/packages/core/main.min.js', array(), '4.3.1', true);
+    wp_enqueue_script('calendarPluginScriptDay', get_template_directory_uri() . '/assets/fullcalendar-4.3.1/packages/daygrid/main.js', array(), '4.3.1', true);
     wp_enqueue_script('calendarPluginScriptBootstrap', get_template_directory_uri() . '/assets/fullcalendar-4.3.1/packages/bootstrap/main.min.js', array(), '4.3.1', true);
+
 
     $options = get_option( 'apikey_options' );
     wp_enqueue_script( 'google_js', 'https://maps.googleapis.com/maps/api/js?v=3.exp&key='.$options['apikey_field_google'].'&libraries=places', array(), '', true );
@@ -52,12 +51,14 @@ function customThemeEnqueues(){
         $eventObj->start = get_post_meta(get_the_ID(), 'eventStartTime', true);
         $eventObj->end = get_post_meta(get_the_ID(), 'eventEndTime', true);
         $eventObj->url = get_permalink();
+        $eventObj->bio = get_post_meta(get_the_ID(), 'eventBio', true);
         array_push($allEvents, $eventObj);
     endwhile;
 
     wp_localize_script('customScript', 'local_values', array(
         'duration' => get_theme_mod('whtn_slide_speed_setting', 3),
-        'events' => $allEvents
+        'events' => $allEvents,
+        'themeColour' => get_theme_mod('whtn_button_colour_setting', '#3EA86F')
     ));
 }
 add_action('wp_enqueue_scripts', 'customThemeEnqueues', 11);

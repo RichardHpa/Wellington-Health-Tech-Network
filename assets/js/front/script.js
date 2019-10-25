@@ -20,8 +20,6 @@ $(document).ready(() => {
     }
 
     let navOpen = false;
-
-
     $('.menuIcon').click(() => {
         $('.hiddenNav').addClass('navOpen');
         setTimeout(() => {
@@ -123,6 +121,7 @@ $(document).ready(() => {
 
 var el = document.getElementById('calendar');
 if(el){
+    let currentEvents = [];
     document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
 
@@ -148,15 +147,73 @@ if(el){
                 return moment(date).format('dd');
             },
             eventLimit: false,
-            eventClick: function(info) {
-                info.jsEvent.preventDefault();
-                // console.log(info.event.start);
-                console.log(moment(info.event.start).format('MMMM'));
+            datesDestroy: function(){
+                currentEvents = [];
+            },
+            eventRender: function(event, el){
+                currentEvents.push(event);
+                let events = event.event.start;
+                let format = moment(events).format('YYYY-MM-DD');
+                let element = $(`td[data-date=${format}]`);
+                element.css({'color': local_values.themeColour,'font-weight': 'bold'});
+                element.hover(function(){
+                    $(this).css({'cursor': 'pointer'});
+                });
             }
         });
-
         calendar.render();
-
     });
 
+    $(document).on('click', '.fc-day-top', function(){
+        $('#eventsList').empty();
+        const currentDate = $(this).data('date');
+        let foundEvent = false;
+        for (var i = 0; i < currentEvents.length; i++) {
+            let formatedDate = moment(currentEvents[i].event.start).format('YYYY-MM-DD');
+            if(currentDate === formatedDate){
+                foundEvent = true;
+                $('#eventsList').append(`
+                    <div class="card mb-3 rounded-0 eventCard">
+                        <a href="${currentEvents[i].event.url}">
+                            <div class="row no-gutters">
+                                <div class="col-md">
+                                    <div class="card-body">
+                                        <h5 class="card-title mb-0">${currentEvents[i].event.title}</h5>
+                                        <p class="card-text mb-0"><small class="text-muted">${moment(currentEvents[i].event.start).format('LT')}</small></p>
+                                        <p class="card-text">${currentEvents[i].event.extendedProps.bio}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                `);
+            }
+        }
+        if(foundEvent === false){
+            $('#eventsList').append('<p>There are no events on this date.</p>');
+        }
+    });
+
+    $('#showAllEvents').click(function(e){
+        e.preventDefault();
+        console.log(local_values.events);
+        $('#eventsList').empty();
+        for (var i = 0; i < local_values.events.length; i++) {
+            $('#eventsList').append(`
+                <div class="card mb-3 rounded-0 eventCard">
+                    <a href="${local_values.events[i].url}">
+                        <div class="row no-gutters">
+                            <div class="col-md">
+                                <div class="card-body">
+                                    <h5 class="card-title mb-0">${local_values.events[i].title}</h5>
+                                    <p class="card-text mb-0"><small class="text-muted">${moment(local_values.events[i].start).format('LT')}</small></p>
+                                    <p class="card-text">${local_values.events[i].bio}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            `);
+        }
+    });
 }
