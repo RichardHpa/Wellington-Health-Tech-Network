@@ -64,23 +64,27 @@ $metaboxes = array(
             ),
             'audioLink' => array(
                 'title' => 'URL to Audio Podcast',
-                'type' => 'link'
+                'type' => 'url',
+                'extraClasses' => 'audio podcastType hidden'
             ),
             'audioUploader' => array(
                 'title' => 'Upload Audio Directly',
                 'type' => 'uploader',
                 'buttonText' => 'Add new Audio',
-                'uploadTypes' => 'audio'
+                'uploadTypes' => 'audio',
+                'extraClasses' => 'audio podcastType hidden'
             ),
             'videoLink' => array(
                 'title' => 'URL to Video Podcast',
-                'type' => 'link'
+                'type' => 'url',
+                'extraClasses' => 'video podcastType hidden'
             ),
             'videoUploader' => array(
                 'title' => 'Upload Video Directly',
                 'type' => 'uploader',
                 'buttonText' => 'Add new Video',
-                'uploadTypes' => 'video'
+                'uploadTypes' => 'video',
+                'extraClasses' => 'video podcastType hidden'
             )
         )
     )
@@ -104,21 +108,21 @@ function show_metaboxes($post, $args){
         foreach ($fields as $id => $field) {
             switch($field['type']){
                 case 'textarea':
-                    $output .= '<div class="form-group hide" id="'.$id.'">';
+                    $output .= '<div class="form-group hide '.$field['extraClasses'].'">';
                         $output .= '<label for="'.$id.'" class="customLabel">'.$field['title'].'</label>';
-                        $output .= '<textarea name="'.$id.'" rows="'.$field['rows'].'">'.$customValues[$id][0].'</textarea>';
+                        $output .= '<textarea id="'.$id.'" name="'.$id.'" rows="'.$field['rows'].'">'.$customValues[$id][0].'</textarea>';
                     $output .= '</div>';
                 break;
                 case 'url':
-                    $output .= '<div class="form-group" id="'.$id.'">';
+                    $output .= '<div class="form-group '.$field['extraClasses'].'">';
                         $output .= '<label for="'.$id.'" class="customLabel">'.$field['title'].'</label>';
                         $output .= '<input id="'.$id.'" type="url" name="'.$id.'" class="customInput" value="'.$customValues[$id][0].'">';
                     $output .= '</div>';
                 break;
                 case 'select':
-                    $output .= '<div class="form-group" id="'.$id.'">';
+                    $output .= '<div class="form-group">';
                     $output .= '<label for="'.$id.'" class="customLabel">'.$field['title'].'</label>';
-                    $output .= '<select name="'.$id.'" class="customField">';
+                    $output .= '<select id="'.$id.'" name="'.$id.'" class="customField">';
                         $output .= '<option>-- Select a Type -- </option>';
                         foreach($field['options'] as $option){
                             $output .= '<option>'.$option.'</option>';
@@ -127,9 +131,56 @@ function show_metaboxes($post, $args){
                     $output .= '</div>';
                 break;
                 case 'uploader':
-                    $output .= '<div class="form-group" data-type="'.$field['uploadTypes'].'">';
+                    $mediaID =  get_post_meta( $post->ID, $id, true );
+                    if($mediaID){
+                         $mediaSrc = wp_get_attachment_url( $mediaID );
+                         // $audioClasses = "form-group validAudio";
+                     } else{
+                         // $audioClasses = "form-group noAudio";
+                     }
+                    $output .= '<div class="form-group '.$field['extraClasses'].'" data-type="'.$field['uploadTypes'].'">';
                         $output .= '<label for="'.$id.'" class="customLabel">'.$field['title'].'</label>';
-                        $output .= '<button class="customUpload button">'.$field['buttonText'].'</button>';
+                        $output .= '<button class="customUpload button" data-type="upload">'.$field['buttonText'].'</button>';
+                        $output .= '<button class="customUpload button hidden" data-type="remove">Remove Media</button>';
+                        $output .= '<input type="hidden" value="'. $mediaID .'" class="customInput regular-text hiddenCustomInput" name="'.$id.'" readonly>';
+                        switch($field['uploadTypes']){
+                            case 'audio':
+                                $output .= '<audio controls>';
+                                    if($audioID){
+                                        $output .= '<source src="'.$mediaSrc.'">';
+                                    } else {
+                                        $output .= '<source src="">';
+                                    }
+                                    $output .= 'Your browser does not support HTML5 Audio.';
+                                $output .= '</audio>';
+                            break;
+                            case 'video':
+                                $output .= '<video controls>';
+                                    if($videoID){
+                                        $output .= '<source src="'.$mediaSrc.'">';
+                                    } else {
+                                        $output .= '<source src="">';
+                                    }
+                                    $output .= 'Your browser does not support HTML5 video.';
+                                $output .= '</video>';
+                            break;
+                            case 'image':
+                                $output .= '<img class="custom_image" src="'.$mediaSrc.'">';
+                            break;
+                        };
+                    $output .= '</div>';
+                break;
+                case 'hidden':
+                    $output .= '<input id="'.$id.'" type="hidden" name="'.$id.'" class="customInput" value="'.$customValues[$id][0].'">';
+                break;
+                case 'wysiwyg':
+                    ob_start();
+                    echo '<label class="customLabel">'.$field['title'].'</label>';
+                    echo wp_editor($customValues['eventDescriptionEditor'][0],$id.'Editor', array('media_buttons' => false));
+                    $wysiwygEditor = ob_get_contents();
+                    ob_end_clean();
+                    $output .= '<div class="form-group hide" id="'.$id.'">';
+                        $output .= $wysiwygEditor;
                     $output .= '</div>';
                 break;
                 //These are for the events
@@ -160,19 +211,6 @@ function show_metaboxes($post, $args){
                 break;
                 case 'eventMap':
                     $output .= '<div id="map" class="hide"></div>';
-                break;
-                case 'hidden':
-                    $output .= '<input id="'.$id.'" type="hidden" name="'.$id.'" class="customInput" value="'.$customValues[$id][0].'">';
-                break;
-                case 'wysiwyg':
-                    ob_start();
-                    echo '<label class="customLabel">Event Description</label>';
-                    echo wp_editor($customValues['eventDescriptionEditor'][0],$id.'Editor', array('media_buttons' => false));
-                    $wysiwygEditor = ob_get_contents();
-                    ob_end_clean();
-                    $output .= '<div class="form-group hide" id="'.$id.'">';
-                        $output .= $wysiwygEditor;
-                    $output .= '</div>';
                 break;
                 default:
                     $output .= '<div class="form-group">';

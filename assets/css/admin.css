@@ -35,6 +35,7 @@
 
 .customUpload {
   margin: 10px 0 !important;
+  margin-right: 10px !important;
 }
 
 .alwaysHidden {
@@ -92,4 +93,26 @@
   margin: 0 0 3px;
   background-color: #fff;
   margin: 10px 0;
+}
+
+audio {
+  display: block;
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 0;
+}
+
+video {
+  border: 1px solid #95a5a6;
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: auto;
+}
+
+.custom_image {
+  display: block;
+  max-width: 100%;
 }

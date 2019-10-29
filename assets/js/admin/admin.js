@@ -136,40 +136,87 @@ function createMap(lat, lng){
     }
 }
 
+$(document).on('change', '#podcastType', function(e){
+    const val = $(this).val().toLowerCase();
+    $('.podcastType').hide();
+    $('.'+val).fadeIn().removeClass('hidden');
+});
 
-$(document).on('click', '.customUpload', function(e){
+$(document).on('click', 'button[data-type="upload"]', function(e){
     e.preventDefault();
     const button = $(this);
     const formGroup = $(this).parent('.form-group');
     const types = formGroup.data('type').split(',');
-    let items_frame;
+    formGroup.find('.errors').remove();
+    var items_frame;
     if ( items_frame ) {
         items_frame.open();
         return;
     }
     items_frame = wp.media.frames.items = wp.media({
-        title: 'Add to Gallery',
+        title: 'Add Media to Gallery',
         button: {
-            text: 'Select or Upload Media'
+            text: 'Select or Upload a Media Item'
         },
         library: {
             type: types
         },
     });
     items_frame.open();
+
     items_frame.on( 'select', function() {
-        var attachment = items_frame.state().get('selection').first().toJSON();
-        console.log(attachment.type);
-        // if(attachment.type !== 'audio'){
-        //     formGroup.prepend('<p class="errors">Error: must be a audio clip</p>');
-        // } else {
-        //     formGroup.find('.hiddenCustomInput').val(attachment.id);
-        //     formGroup.find('source').attr('src', attachment.url);
-        //     var player = formGroup.find('audio');
-        //     player.get(0).pause();
-        //     player.get(0).load();
-        //     formGroup.removeClass('noAudio').addClass('validAudio');
-        //     formGroup.find('.removeButton').show();
-        // }
+        const attachment = items_frame.state().get('selection').first().toJSON();
+        if(!types.includes(attachment.type)){
+            formGroup.prepend(`
+                <div class="errors">
+                    <p>Error: Must be a valid media type for this input. Please upload one of theset types: ${types} </p>
+                </div>
+            `);
+        } else {
+            formGroup.find('.hiddenCustomInput').val(attachment.id);
+            switch(attachment.type){
+                case 'audio':
+                    formGroup.find('source').attr('src', attachment.url);
+                    let audioPlayer = formGroup.find('audio');
+                    audioPlayer.get(0).pause();
+                    audioPlayer.get(0).load();
+                break;
+                case 'video':
+                    formGroup.find('source').attr('src', attachment.url);
+                    let videoPlayer = formGroup.find('video');
+                    videoPlayer.get(0).pause();
+                    videoPlayer.get(0).load();
+                break;
+                case 'image':
+                    formGroup.find('img').attr('src', attachment.url);
+                break;
+            }
+            formGroup.find('button[data-type="remove"]').removeClass('hidden');
+        }
     });
+});
+
+$(document).on('click', 'button[data-type="remove"]', function(e){
+    e.preventDefault();
+    const formGroup = $(this).parent('.form-group');
+    const types = formGroup.data('type').split(',');
+    formGroup.find('.hiddenCustomInput').val('');
+    switch(types[0]){
+        case 'audio':
+            formGroup.find('source').attr('src', '');
+            let audioPlayer = formGroup.find('audio');
+            audioPlayer.get(0).pause();
+            audioPlayer.get(0).load();
+        break;
+        case 'video':
+            formGroup.find('source').attr('src', '');
+            let videoPlayer = formGroup.find('video');
+            videoPlayer.get(0).pause();
+            videoPlayer.get(0).load();
+        break;
+        case 'image':
+            formGroup.find('img').attr('src', '');
+        break;
+    }
+
 });
