@@ -136,6 +136,14 @@ function createMap(lat, lng){
     }
 }
 
+$(document).ready(function(){
+    if($('#podcastType').length){
+        const val = $('#podcastType').val().toLowerCase();
+        $('.'+val).fadeIn().removeClass('hidden');
+    }
+
+});
+
 $(document).on('change', '#podcastType', function(e){
     const val = $(this).val().toLowerCase();
     $('.podcastType').hide();

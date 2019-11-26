@@ -120,12 +120,19 @@ function show_metaboxes($post, $args){
                     $output .= '</div>';
                 break;
                 case 'select':
+                    $selectedOption =  get_post_meta( $post->ID, $id, true );
+                    $selected = '';
                     $output .= '<div class="form-group">';
                     $output .= '<label for="'.$id.'" class="customLabel">'.$field['title'].'</label>';
                     $output .= '<select id="'.$id.'" name="'.$id.'" class="customField">';
                         $output .= '<option>-- Select a Type -- </option>';
                         foreach($field['options'] as $option){
-                            $output .= '<option>'.$option.'</option>';
+                            if($selectedOption === $option){
+                                $selected = 'selected="selected"';
+                            } else {
+                                $selected = '';
+                            }
+                            $output .= '<option '.$selected.' >'.$option.'</option>';
                         }
                     $output .= '</select>';
                     $output .= '</div>';
@@ -146,7 +153,7 @@ function show_metaboxes($post, $args){
                         switch($field['uploadTypes']){
                             case 'audio':
                                 $output .= '<audio controls>';
-                                    if($audioID){
+                                    if($mediaSrc){
                                         $output .= '<source src="'.$mediaSrc.'">';
                                     } else {
                                         $output .= '<source src="">';
@@ -156,7 +163,7 @@ function show_metaboxes($post, $args){
                             break;
                             case 'video':
                                 $output .= '<video controls>';
-                                    if($videoID){
+                                    if($mediaSrc){
                                         $output .= '<source src="'.$mediaSrc.'">';
                                     } else {
                                         $output .= '<source src="">';

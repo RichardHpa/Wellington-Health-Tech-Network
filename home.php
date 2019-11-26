@@ -16,7 +16,7 @@
                 </div>
                 <?php if(have_posts()): ?>
                     <?php while(have_posts()): the_post();?>
-                        <div class="card shadow-sm rounded-0 mb-4 p-3">
+                        <div class="card shadow-sm rounded-0 mb-4">
                             <div class="row">
                                 <?php if(has_post_thumbnail()): ?>
                                     <div class="col-12 col-md-3 d-flex justify-content-center align-items-center">
@@ -27,7 +27,7 @@
                                     <div class="card-body">
                                       <h5 class="card-title"><?php the_title(); ?></h5>
                                       <p class="card-text"><?php the_excerpt(); ?></p>
-                                      <a href="<?php the_permalink(); ?>" class="btn btn-whtn">Go somewhere</a>
+                                      <a href="<?php the_permalink(); ?>" class="btn btn-whtn">Read More</a>
                                     </div>
                                 </div>
                             </div>

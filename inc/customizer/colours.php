@@ -131,6 +131,10 @@ function whtn_customizer_style_output(){
             .eventCard .row:hover{
                 border-color: <?php echo get_theme_mod('whtn_button_colour_setting', '#3EA86F'); ?>;
             }
+            .btn-primary.disabled,
+            .btn-primary:disabled{
+                background-color: <?php echo get_theme_mod('whtn_button_colour_setting', '#3EA86F'); ?>;
+            }
 
 
         </style>

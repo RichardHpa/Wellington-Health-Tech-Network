@@ -116,3 +116,26 @@ video {
   display: block;
   max-width: 100%;
 }
+
+.dtp_modal-title {
+  border-bottom: solid 3px #0073aa;
+}
+
+.dpt_modal-button {
+  box-shadow: none;
+  background-color: #0073aa;
+}
+
+.dtp_modal-colored {
+  color: #0073aa;
+}
+
+.dtp_modal-cell-selected {
+  border-radius: 50%;
+  background-color: #0073aa;
+  color: white;
+}
+
+.ico-size-large {
+  line-height: 70px;
+}
