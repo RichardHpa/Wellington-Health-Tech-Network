@@ -12,7 +12,7 @@
 
         $wp_customize->add_section('whtn_slideshow_section', array(
     		'title'      => 'Slideshow',
-    		'description' => 'Settings for the home screen slideshow.',
+    		'description' => 'Settings for the home screen slideshow.<br> If you only choose 1 then it will be a static image rather than a slideshow.',
     		'priority'   => 100,
     	));
 

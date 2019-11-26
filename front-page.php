@@ -8,7 +8,6 @@
     </head>
     <body <?php body_class(); ?>>
         <div class="fullScreen">
-
             <div class="contentContainer">
                 <div class="contentInner">
                     <div class="frontHeader">
@@ -26,23 +25,27 @@
                                         }
                                      ?>
                                 </div>
-                                <div class="col-12 col-md-6 d-none d-md-block">
-                                    <div class="notifications float-right">
-
-                                        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
-                                          <div class="toast-header">
-                                            <strong class="mr-auto">Bootstrap</strong>
-                                            <small class="text-muted">2 seconds ago</small>
-                                            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                                              <span aria-hidden="true">&times;</span>
-                                            </button>
-                                          </div>
-                                          <div class="toast-body">
-                                            Heads up, toasts will stack automatically
-                                          </div>
+                                <?php $notification = get_theme_mod('whtn_notification_display_setting', 'yes'); ?>
+                                <?php if($notification === 'yes'): ?>
+                                    <div class="col-12 col-md-6 d-none d-md-block">
+                                        <div class="notifications float-right">
+                                            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
+                                              <div class="toast-header">
+                                                <strong class="mr-auto"><?php echo get_theme_mod('whtn_notification_title_setting', 'Notification Title'); ?></strong>
+                                                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                                </button>
+                                              </div>
+                                              <div class="toast-body">
+                                                <?php echo get_theme_mod('whtn_notification_description_setting', 'Notification Description'); ?>
+                                                <?php if(get_theme_mod('whtn_notification_link_setting')): ?>
+                                                    <br><a href="<?php echo get_theme_mod('whtn_notification_link_setting'); ?>" target="_blank">Check it out</a>
+                                                <?php endif; ?>
+                                              </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                <?php endif; ?>
                             </div>
 
                         </nav>
@@ -71,7 +74,11 @@
                 <?php $rhSlideCount = get_theme_mod('whtn_slide_count_setting', 5); ?>
                 <?php for($i=1;$i<=$rhSlideCount;$i++): ?>
                     <?php
-                    $imageURL = get_theme_mod('whtn_slide_' . $i . '_setting');
+                        if(get_theme_mod('whtn_slide_' . $i . '_setting')){
+                            $imageURL = get_theme_mod('whtn_slide_' . $i . '_setting');
+                        } else {
+                            $imageURL = get_template_directory_uri() . '/assets/images/placeholderSlide.jpg';
+                        }
                         $classes = 'slide';
                         if($i == 1){
                             $classes .= ' active';

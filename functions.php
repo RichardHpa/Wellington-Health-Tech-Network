@@ -110,7 +110,7 @@ require_once get_template_directory() . '/inc/custom_settings.php';
 
 require_once get_template_directory() . '/inc/custom_post_types.php';
 
-require_once get_template_directory() . '/inc/custom-fields.php';
+require_once get_template_directory() . '/inc/custom_fields.php';
 
 require_once get_parent_theme_file_path('/inc/walkers/class-wp-dropdown-child.php');
 
